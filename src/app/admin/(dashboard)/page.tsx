@@ -1,7 +1,36 @@
 "use client";
 
-import { useState } from "react";
-import { products } from "@/lib/data";
+import { useState, useEffect } from "react";
+import { products as seedProducts } from "@/lib/data";
+import type { Product } from "@/lib/store";
+
+const PRODUCTS_STORAGE_KEY = "arinas_admin_products";
+
+type ProductForm = {
+  id: string;
+  name: string;
+  category: string;
+  price: string;
+  originalPrice: string;
+  image: string;
+  badge: string;
+};
+
+const emptyForm: ProductForm = {
+  id: "", name: "", category: "", price: "", originalPrice: "", image: "", badge: "",
+};
+
+function toForm(p: Product): ProductForm {
+  return {
+    id: p.id,
+    name: p.name,
+    category: p.category,
+    price: String(p.price),
+    originalPrice: p.originalPrice != null ? String(p.originalPrice) : "",
+    image: p.image,
+    badge: p.badge ?? "",
+  };
+}
 import {
   BarChart2, Package, ShoppingBag, Users, Tag, Settings,
   TrendingUp, TrendingDown, Eye, Edit2, Trash2, Plus,
@@ -40,7 +69,79 @@ export default function AdminPage() {
   const [productSearch, setProductSearch] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const filteredProducts = products.filter((p) =>
+  // Editable product catalog, persisted to localStorage so changes survive reloads.
+  const [productList, setProductList] = useState<Product[]>(seedProducts);
+  const [editing, setEditing] = useState<ProductForm | null>(null);
+  const [isNew, setIsNew] = useState(false);
+  const [savedFlash, setSavedFlash] = useState("");
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Product[];
+        // Hydrate the editable catalog from localStorage on mount.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (Array.isArray(parsed) && parsed.length) setProductList(parsed);
+      }
+    } catch {}
+  }, []);
+
+  const persist = (list: Product[]) => {
+    setProductList(list);
+    try {
+      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(list));
+    } catch {}
+  };
+
+  const openNew = () => {
+    const nextId = String(Math.max(0, ...productList.map((p) => Number(p.id) || 0)) + 1);
+    setIsNew(true);
+    setEditing({ ...emptyForm, id: nextId });
+  };
+
+  const openEdit = (p: Product) => {
+    setIsNew(false);
+    setEditing(toForm(p));
+  };
+
+  const removeProduct = (id: string) => {
+    if (typeof window !== "undefined" && !window.confirm("Delete this product?")) return;
+    persist(productList.filter((p) => p.id !== id));
+  };
+
+  const saveProduct = () => {
+    if (!editing) return;
+    if (!editing.name.trim() || !editing.price.trim()) {
+      setSavedFlash("Name and price are required.");
+      return;
+    }
+    const existing = productList.find((p) => p.id === editing.id);
+    const merged: Product = {
+      ...(existing ?? ({ id: editing.id } as Product)),
+      id: editing.id,
+      name: editing.name.trim(),
+      category: editing.category.trim() || "Uncategorized",
+      price: Number(editing.price) || 0,
+      originalPrice: editing.originalPrice.trim() ? Number(editing.originalPrice) : undefined,
+      image: editing.image.trim() || existing?.image || "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90",
+      badge: editing.badge.trim() || undefined,
+    };
+    const list = existing
+      ? productList.map((p) => (p.id === merged.id ? merged : p))
+      : [merged, ...productList];
+    persist(list);
+    setEditing(null);
+    setSavedFlash(isNew ? "Product added." : "Product updated.");
+    setTimeout(() => setSavedFlash(""), 2500);
+  };
+
+  const resetCatalog = () => {
+    if (typeof window !== "undefined" && !window.confirm("Reset all products to defaults?")) return;
+    persist(seedProducts);
+  };
+
+  const filteredProducts = productList.filter((p) =>
     p.name.toLowerCase().includes(productSearch.toLowerCase())
   );
 
@@ -128,7 +229,7 @@ export default function AdminPage() {
                 className="pl-9 pr-4 py-2 text-xs border border-[#E4E4E7] focus:outline-none focus:border-[#C9A86A] w-48 bg-[#FAFAFA]"
               />
             </div>
-            <button className="flex items-center gap-2 bg-[#111111] text-white text-xs tracking-wider px-4 py-2 hover:bg-[#C9A86A] transition-colors">
+            <button onClick={openNew} className="flex items-center gap-2 bg-[#111111] text-white text-xs tracking-wider px-4 py-2 hover:bg-[#C9A86A] transition-colors">
               <Plus size={13} />
               New Product
             </button>
@@ -216,7 +317,7 @@ export default function AdminPage() {
                 <div className="bg-white border border-[#E4E4E7] p-5 lg:col-span-2">
                   <h3 className="text-sm font-medium text-[#111111] mb-4">Top Products</h3>
                   <div className="space-y-3">
-                    {products.slice(0, 5).map((p, i) => {
+                    {productList.slice(0, 5).map((p, i) => {
                       const soldCount = 12 + ((Number(p.id) * 7) % 43);
 
                       return (
@@ -245,7 +346,7 @@ export default function AdminPage() {
                 <div className="bg-[#111111] p-5 text-white">
                   <h3 className="text-xs tracking-[0.2em] uppercase text-white/60 mb-4">Inventory Alerts</h3>
                   <div className="space-y-3">
-                    {products.slice(0, 4).map((p) => {
+                    {productList.slice(0, 4).map((p) => {
                       const lowStock = 1 + (Number(p.id) % 5);
                       const isCritical = lowStock <= 2;
 
@@ -285,7 +386,16 @@ export default function AdminPage() {
                 <button className="flex items-center gap-2 border border-[#E4E4E7] text-xs px-4 py-2.5 hover:border-[#111111] transition-colors">
                   <Download size={13} /> Export
                 </button>
+                <button onClick={resetCatalog} className="flex items-center gap-2 border border-[#E4E4E7] text-xs px-4 py-2.5 hover:border-[#111111] transition-colors">
+                  <RefreshCw size={13} /> Reset
+                </button>
               </div>
+
+              {savedFlash && (
+                <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-2.5">
+                  <CheckCircle size={13} /> {savedFlash}
+                </div>
+              )}
 
               <div className="bg-white border border-[#E4E4E7] overflow-hidden">
                 <table className="w-full">
@@ -346,10 +456,10 @@ export default function AdminPage() {
                               className="w-7 h-7 flex items-center justify-center border border-[#E4E4E7] hover:border-[#111111] transition-colors">
                               <Eye size={12} />
                             </Link>
-                            <button className="w-7 h-7 flex items-center justify-center border border-[#E4E4E7] hover:border-[#C9A86A] hover:text-[#C9A86A] transition-colors">
+                            <button onClick={() => openEdit(product)} aria-label="Edit product" className="w-7 h-7 flex items-center justify-center border border-[#E4E4E7] hover:border-[#C9A86A] hover:text-[#C9A86A] transition-colors">
                               <Edit2 size={12} />
                             </button>
-                            <button className="w-7 h-7 flex items-center justify-center border border-[#E4E4E7] hover:border-red-400 hover:text-red-400 transition-colors">
+                            <button onClick={() => removeProduct(product.id)} aria-label="Delete product" className="w-7 h-7 flex items-center justify-center border border-[#E4E4E7] hover:border-red-400 hover:text-red-400 transition-colors">
                               <Trash2 size={12} />
                             </button>
                           </div>
@@ -526,6 +636,64 @@ export default function AdminPage() {
           )}
         </div>
       </div>
+
+      {/* ── Product editor modal ── */}
+      {editing && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setEditing(null)} />
+          <div className="relative bg-white w-full max-w-lg shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#F0EBE3]">
+              <h3 className="text-sm font-medium text-[#111111] tracking-wide">
+                {isNew ? "New Product" : "Edit Product"}
+              </h3>
+              <button onClick={() => setEditing(null)} aria-label="Close" className="text-[#A1A1AA] hover:text-[#111111] transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {[
+                { key: "name" as const, label: "Name", type: "text", placeholder: "Silk Evening Gown" },
+                { key: "category" as const, label: "Category", type: "text", placeholder: "Dresses" },
+                { key: "price" as const, label: "Price ($)", type: "number", placeholder: "2850" },
+                { key: "originalPrice" as const, label: "Original Price ($) — optional", type: "number", placeholder: "3400" },
+                { key: "image" as const, label: "Image URL", type: "text", placeholder: "https://…" },
+                { key: "badge" as const, label: "Badge — optional (NEW / SALE / LIMITED)", type: "text", placeholder: "NEW" },
+              ].map((f) => (
+                <div key={f.key}>
+                  <label className="block text-[11px] tracking-wider uppercase text-[#71717A] font-medium mb-1.5">
+                    {f.label}
+                  </label>
+                  <input
+                    type={f.type}
+                    value={editing[f.key]}
+                    placeholder={f.placeholder}
+                    onChange={(e) => setEditing({ ...editing, [f.key]: e.target.value })}
+                    className="w-full border border-[#E4E4E7] px-3 py-2.5 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors"
+                  />
+                </div>
+              ))}
+
+              {editing.image && (
+                <div className="flex items-center gap-3 pt-1">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={editing.image} alt="" className="w-12 h-14 object-cover bg-[#F5F0EA]" />
+                  <span className="text-[11px] text-[#A1A1AA]">Preview</span>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[#F0EBE3]">
+              <button onClick={() => setEditing(null)} className="text-xs tracking-wider uppercase border border-[#E4E4E7] px-5 py-2.5 hover:border-[#111111] transition-colors">
+                Cancel
+              </button>
+              <button onClick={saveProduct} className="text-xs tracking-[0.2em] uppercase bg-[#111111] text-white px-6 py-2.5 hover:bg-[#C9A86A] transition-colors">
+                {isNew ? "Add Product" : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
