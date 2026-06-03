@@ -4,7 +4,7 @@
     "description": "Discover ARINAS, a curated destination for luxury fashion. Shop the finest couture pieces from the world's most prestigious ateliers."
   },
   "announcement": [
-    "Free shipping on orders above $500  ·  Free returns within 30 days",
+    "Free shipping on orders above $500 · Free returns within 30 days",
     "New Arrivals: Summer Collection 2025 — Discover Now",
     "Complimentary gift wrapping on all orders"
   ],
@@ -31,29 +31,29 @@
   },
   "shortcuts": {
     "freeShipping": "Free Shipping",
-    "freeShippingSub": "On orders over $500",
+    "freeShippingSub": "Orders above $500",
     "securePayment": "Secure Payment",
     "securePaymentSub": "Encrypted checkout",
     "freeReturns": "Free Returns",
     "freeReturnsSub": "Within 30 days",
     "authenticity": "Authenticity",
-    "authenticitySub": "Certified genuine"
+    "authenticitySub": "Certified pieces"
   },
   "footer": {
-    "tagline": "A house built on the premise that true luxury lies in the singular, the rare, and the enduring.",
-    "house": "The House",
+    "tagline": "Luxury fashion curated with precision.",
+    "house": "House",
     "clientCare": "Client Care",
-    "circle": "The Circle",
-    "circleText": "Private access to new arrivals and exclusive events.",
-    "emailPlaceholder": "Your email",
+    "circle": "The ARINAS Circle",
+    "circleText": "Receive private previews, collection launches, and styling notes.",
+    "emailPlaceholder": "Email address",
     "subscribe": "Subscribe",
-    "welcome": "Welcome to the Circle.",
+    "welcome": "Welcome to the ARINAS Circle.",
     "privacy": "Privacy",
     "terms": "Terms",
     "cookies": "Cookies"
   },
   "common": {
-    "discover": "Discover the Collection",
+    "discover": "Discover",
     "addToBag": "Add to Bag",
     "quickView": "Quick View",
     "viewAll": "View All"

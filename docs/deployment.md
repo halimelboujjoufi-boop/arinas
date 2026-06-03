@@ -21,6 +21,9 @@ $env:GITHUB_REPO_NAME="arinas"
 $env:VERCEL_PROJECT_NAME="arinas"
 
 $env:NEXT_PUBLIC_SITE_URL="https://your-domain.com"
+$env:ADMIN_EMAIL="admin@your-domain.com"
+$env:ADMIN_PASSWORD_HASH="sha256_hash_of_admin_password"
+$env:ADMIN_SESSION_SECRET="at-least-32-random-characters"
 $env:NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
 $env:NEXT_PUBLIC_SUPABASE_ANON_KEY="..."
 $env:SUPABASE_SERVICE_ROLE_KEY="..."
@@ -41,6 +44,12 @@ Optional variables:
 - `VERCEL_TEAM_ID`: target a Vercel team instead of the personal account.
 - `GITHUB_VISIBILITY`: set to `public` or `private`; defaults to `private`.
 - `POSTMARK_SERVER_TOKEN` or `SENDGRID_API_KEY`: use these instead of `RESEND_API_KEY` if the app switches email providers.
+
+Generate the admin password hash locally before adding it to Vercel:
+
+```powershell
+node -e "const { createHash } = require('crypto'); console.log(createHash('sha256').update(process.argv[1]).digest('hex'))" "your-strong-password"
+```
 
 The setup script initializes Git if needed, renames the primary branch to `main`, creates or reuses the GitHub repository, commits current files, pushes to GitHub, protects `main`, creates or reuses the Vercel project, links it to GitHub, and uploads environment variables.
 
@@ -75,6 +84,7 @@ Only `NEXT_PUBLIC_*` variables are exposed to browser code. Server-side credenti
 
 Supported groups:
 
+- Admin: `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET`
 - Supabase: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
 - Stripe: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
 - Analytics: `NEXT_PUBLIC_ANALYTICS_ID`, `ANALYTICS_API_KEY`
@@ -103,4 +113,3 @@ If Vercel deployment fails:
 The build uses Turbopack for Next.js 16. GitHub Actions caches `.next/cache` and npm dependencies. Next image delivery is configured for AVIF/WebP, long-lived cache TTLs, limited redirects, and explicit remote patterns.
 
 Security headers are configured in `next.config.ts`, including HSTS, clickjacking protection, MIME sniffing protection, referrer policy, and permissions policy.
-

@@ -41,9 +41,9 @@ export default function ContactPage() {
               <div className="space-y-8">
                 {[
                   { Icon: MapPin,  title: "Visit",   lines: ["12 Rue de la Paix", "Paris, 75002, France"] },
-                  { Icon: Phone,   title: "Call",    lines: ["+33 1 23 45 67 89", "Mon–Sat, 9am–7pm CET"] },
+                  { Icon: Phone,   title: "Call",    lines: ["+33 1 23 45 67 89", "Mon-Sat, 9am-7pm CET"] },
                   { Icon: Mail,    title: "Email",   lines: ["contact@arinas.com", "Reply within 24 hours"] },
-                  { Icon: Clock,   title: "Hours",   lines: ["Mon–Sat: 10am–8pm", "Sunday: 12pm–6pm"] },
+                  { Icon: Clock,   title: "Hours",   lines: ["Mon-Sat: 10am-8pm", "Sunday: 12pm-6pm"] },
                 ].map(({ Icon, title, lines }) => (
                   <div key={title} className="flex gap-5">
                     <div className="w-9 h-9 border border-[#0A0A0A]/10 flex items-center justify-center flex-shrink-0">
@@ -143,7 +143,7 @@ export default function ContactPage() {
                   <textarea
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Your message…"
+                    placeholder="Your message&"
                     rows={6}
                     required
                     className={`${inputBase} resize-none`}

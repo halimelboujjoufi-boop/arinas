@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
 import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown } from "lucide-react";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 
 type MegaMenu = {
   cols: Array<{ title: string; links: string[] }>;
@@ -17,7 +20,7 @@ type NavItem = {
   sale?: boolean;
 };
 
-/* ─── Data ──────────────────────────────────────────── */
+
 const NAV: NavItem[] = [
   { label: "New Arrivals", href: "/new-arrivals", mega: null },
   {
@@ -29,7 +32,7 @@ const NAV: NavItem[] = [
         { title: "Collections", links: ["Summer 2025", "Luxury Edit", "Limited Edition", "Casual Luxe"] },
       ],
       imgs: [
-        { src: "https://images.unsplash.com/photo-1566479179817-d9e9e50c8f14?w=500&q=90", label: "New Season",  sub: "Just arrived" },
+        { src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=90", label: "New Season",  sub: "Just arrived" },
         { src: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=500&q=90", label: "The Edit",    sub: "Curated picks" },
       ],
     },
@@ -82,14 +85,15 @@ const NAV: NavItem[] = [
 ];
 
 const MSGS = [
-  "Free shipping on orders above $500  ·  Free returns within 30 days",
-  "New Arrivals: Summer Collection 2025 — Discover Now",
+  "Free shipping on orders above $500 - Free returns within 30 days",
+  "New Arrivals: Summer Collection 2025 - Discover Now",
   "Complimentary gift wrapping on all orders",
 ];
 
-/* ─── Component ─────────────────────────────────────── */
+
 export default function Header() {
   const { state, dispatch } = useStore();
+  const pathname = usePathname();
   const [scrolled,     setScrolled]     = useState(false);
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [activeMega,   setActiveMega]   = useState<string | null>(null);
@@ -114,11 +118,13 @@ export default function Header() {
   const closeMega = ()          => { megaTimer.current = setTimeout(() => setActiveMega(null), 160); };
   const stayMega  = ()          => { if (megaTimer.current) clearTimeout(megaTimer.current); };
 
-  const opaque = scrolled || !!activeMega || mobileOpen;
+  const isHome = /^\/(?:en|fr|ar)?\/?$/.test(pathname || "/");
+  const opaque = !isHome || scrolled || !!activeMega || mobileOpen;
 
   /* colour shortcuts */
   const navClr  = opaque && !mobileOpen ? "text-[#2A2A2A]/70 hover:text-[#2A2A2A]"   : "text-white/75 hover:text-white";
   const icoClr  = opaque && !mobileOpen ? "text-[#2A2A2A]/65 hover:text-[#2A2A2A]"   : "text-white/75 hover:text-white";
+  const langTone = opaque && !mobileOpen ? "dark" : "light";
   const logoClr = mobileOpen             ? "text-white"
                 : opaque                 ? "text-[#2A2A2A]"
                 :                          "text-white";
@@ -139,7 +145,7 @@ export default function Header() {
         {/* ── ROW 1 · Announcement ───────────────── */}
         {!mobileOpen && (
           <div
-            className={`flex items-center justify-center h-10 border-b transition-colors duration-500 ${
+            className={`flex items-center justify-center min-h-10 py-2 border-b transition-colors duration-500 ${
               opaque ? "border-[#EAE6E0]" : "border-white/10"
             }`}
           >
@@ -147,8 +153,9 @@ export default function Header() {
               key={msgIdx}
               className="f-label text-center px-4"
               style={{
-                fontSize: "13px",
-                letterSpacing: "0.18em",
+                fontSize: "clamp(10px, 2.8vw, 13px)",
+                letterSpacing: "0.14em",
+                lineHeight: 1.35,
                 color: opaque ? "#2A2620" : "#FFFFFF",
                 textShadow: opaque ? "none" : "0 1px 8px rgba(0,0,0,0.4)",
                 animation: "fadeIn 0.5s ease",
@@ -176,7 +183,7 @@ export default function Header() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Menu"
             >
-              {mobileOpen ? <X size={28} strokeWidth={1.5} /> : <Menu size={28} strokeWidth={1.5} />}
+              {mobileOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
           </div>
 
@@ -203,6 +210,9 @@ export default function Header() {
 
           {/* RIGHT — icons, larger and icon-only for a clean luxury look */}
           <div className="flex items-center justify-end gap-5 lg:gap-8 flex-shrink-0 w-24 lg:w-48">
+            <div className="hidden sm:block">
+              <LanguageSwitcher tone={langTone} />
+            </div>
 
             {/* Search */}
             <button
@@ -210,7 +220,7 @@ export default function Header() {
               className={`transition-colors duration-300 ${icoClr}`}
               aria-label="Search"
             >
-              <Search size={25} strokeWidth={1.5} />
+              <Search size={24} strokeWidth={1.5} />
             </button>
 
             {/* Account (desktop only) */}
@@ -220,7 +230,7 @@ export default function Header() {
                 className={`flex items-center transition-colors duration-300 ${icoClr}`}
                 aria-label="Account"
               >
-                <User size={25} strokeWidth={1.5} />
+                <User size={24} strokeWidth={1.5} />
               </button>
 
               {accountOpen && (
@@ -254,7 +264,7 @@ export default function Header() {
               className={`relative hidden sm:block transition-colors duration-300 ${icoClr}`}
               aria-label="Wishlist"
             >
-              <Heart size={25} strokeWidth={1.5} />
+              <Heart size={24} strokeWidth={1.5} />
               {state.wishlist.length > 0 && (
                 <span
                   className="absolute -top-2.5 -right-2.5 w-5 h-5 bg-[#B89A6A] rounded-full text-white flex items-center justify-center"
@@ -271,7 +281,7 @@ export default function Header() {
               className={`relative transition-colors duration-300 ${icoClr}`}
               aria-label="Shopping bag"
             >
-              <ShoppingBag size={25} strokeWidth={1.5} />
+              <ShoppingBag size={24} strokeWidth={1.5} />
               {cartCount > 0 && (
                 <span
                   className="absolute -top-2.5 -right-2.5 w-5 h-5 bg-[#0A0A0A] rounded-full text-white flex items-center justify-center"
@@ -308,8 +318,8 @@ export default function Header() {
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontWeight: 500,
-                    fontSize: "clamp(16px, 1.25vw, 19px)",
-                    letterSpacing: "0.05em",
+                    fontSize: "clamp(17px, 1.3vw, 20px)",
+                    letterSpacing: "0.055em",
                     textTransform: "uppercase",
                   }}
                 >
@@ -344,19 +354,19 @@ export default function Header() {
               onMouseEnter={stayMega}
               onMouseLeave={closeMega}
             >
-              <div className="max-w-[1580px] mx-auto grid grid-cols-12 gap-16 px-14 py-14">
+              <div className="max-w-[1580px] mx-auto grid grid-cols-12 gap-16 px-14 py-16">
 
                 {/* 3 link columns */}
                 <div className="col-span-7 grid grid-cols-3 gap-10">
                   {item.mega.cols.map((col) => (
                     <div key={col.title}>
                       <p
-                        className="text-[#B89A6A] mb-7"
+                        className="text-[#B89A6A] mb-8"
                         style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "18px", letterSpacing: "0.14em", textTransform: "uppercase" }}
                       >
                         {col.title}
                       </p>
-                      <ul className="space-y-4">
+                      <ul className="space-y-5">
                         {col.links.map((name) => (
                           <li key={name}>
                             <Link
@@ -364,10 +374,11 @@ export default function Header() {
                               onClick={() => setActiveMega(null)}
                               className="block text-[#2A2A2A]/65 hover:text-[#B89A6A] transition-colors"
                               style={{
-                                fontSize: "16px",
+                                fontSize: "18px",
                                 fontFamily: "Inter, sans-serif",
                                 fontWeight: 300,
-                                letterSpacing: "0.02em",
+                                letterSpacing: "0.01em",
+                                lineHeight: 1.35,
                               }}
                             >
                               {name}
@@ -389,9 +400,11 @@ export default function Header() {
                       className="group relative overflow-hidden block"
                       style={{ aspectRatio: "3/4" }}
                     >
-                      <img
+                      <Image
                         src={img.src}
                         alt={img.label}
+                        fill
+                        sizes="220px"
                         className="img-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
@@ -441,6 +454,7 @@ export default function Header() {
             </nav>
 
             <div className="mt-10 pt-8 border-t border-white/[0.07] space-y-6">
+              <LanguageSwitcher tone="light" variant="list" />
               {["Sign In", "Create Account", "My Orders"].map((l) => (
                 <a
                   key={l}

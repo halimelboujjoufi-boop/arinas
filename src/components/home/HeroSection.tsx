@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const SLIDES = [
   {
@@ -17,7 +18,7 @@ const SLIDES = [
     align: "right" as const,
   },
   {
-    src: "https://images.unsplash.com/photo-1566479179817-d9e9e50c8f14?w=1920&q=95",
+    src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=95",
     title: ["Dressed", "in Light"],
     sub: "New Arrivals",
     align: "center" as const,
@@ -45,8 +46,8 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0A0A0A] -mt-[128px] lg:-mt-[206px]">
-      {/* Images — crossfade */}
+    <section dir="ltr" className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0A0A0A] -mt-[128px] lg:-mt-[206px]">
+      {/* Images ? crossfade */}
       {SLIDES.map((s, i) => (
         <div
           key={i}
@@ -57,16 +58,19 @@ export default function HeroSection() {
             transitionTimingFunction: "cubic-bezier(0.4,0,0.2,1)",
           }}
         >
-          <img
+          <Image
             src={s.src}
             alt={s.title.join(" ")}
+            fill
+            priority={i === 0}
+            sizes="100vw"
             className="img-cover"
             style={{
               transform: i === idx ? "scale(1)" : "scale(1.04)",
               transition: "transform 7s ease-out",
             }}
           />
-          {/* Gradient — bottom and slight top fade */}
+          {/* Gradient ? bottom and slight top fade */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/20" />
         </div>
       ))}
@@ -78,8 +82,7 @@ export default function HeroSection() {
           style={{
             opacity: 1,
             transition: "opacity 1s ease",
-            maxWidth: "min(540px, 82vw)",
-            overflow: "hidden",
+            maxWidth: "min(540px, calc(100vw - 64px))",
             textAlign: slide.align === "right" ? "right" : slide.align === "center" ? "center" : "left",
           }}
         >
@@ -91,7 +94,7 @@ export default function HeroSection() {
             {slide.sub}
           </p>
 
-          {/* Main Title — font scales with the box, never overflows */}
+          {/* Main Title ? font scales with the box, never overflows */}
           <div className="mb-8">
             {slide.title.map((word, wi) => (
               <h1
@@ -117,8 +120,8 @@ export default function HeroSection() {
           >
             <Link
               href="/collections"
-              className="f-label text-white/80 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-0.5"
-              style={{ fontSize: "10px", letterSpacing: "0.25em" }}
+              className="f-label inline-block max-w-full text-white/80 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-0.5 leading-relaxed"
+              style={{ fontSize: "10px", letterSpacing: "0.16em", overflowWrap: "anywhere" }}
             >
               Discover the Collection
             </Link>
@@ -135,6 +138,7 @@ export default function HeroSection() {
           {SLIDES.map((_, i) => (
             <button
               key={i}
+              aria-label={`Show slide ${i + 1}`}
               onClick={() => setIdx(i)}
               className={`transition-all duration-500 rounded-full ${
                 i === idx ? "w-6 h-0.5 bg-white" : "w-1.5 h-0.5 bg-white/30 hover:bg-white/60"

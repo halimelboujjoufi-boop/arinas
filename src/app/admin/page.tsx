@@ -6,9 +6,10 @@ import {
   BarChart2, Package, ShoppingBag, Users, Tag, Settings,
   TrendingUp, TrendingDown, Eye, Edit2, Trash2, Plus,
   Search, Filter, Download, RefreshCw, DollarSign,
-  AlertCircle, CheckCircle, Clock, ChevronRight, X
+  AlertCircle, CheckCircle, Clock, ChevronRight, X, LogOut
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const mockOrders = [
   { id: "ORN-A4X91K", customer: "Sophia Laurent", items: 2, total: 4500, status: "delivered", date: "2025-06-01" },
@@ -42,6 +43,11 @@ export default function AdminPage() {
   const filteredProducts = products.filter((p) =>
     p.name.toLowerCase().includes(productSearch.toLowerCase())
   );
+
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
+    window.location.assign("/admin/login");
+  };
 
   const navItems: { key: NavItem; icon: typeof BarChart2; label: string }[] = [
     { key: "dashboard", icon: BarChart2, label: "Dashboard" },
@@ -96,6 +102,14 @@ export default function AdminPage() {
             <Eye size={16} />
             {sidebarOpen && "View Store"}
           </Link>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 px-3 py-2.5 text-white/40 hover:text-white transition-colors text-xs"
+          >
+            <LogOut size={16} />
+            {sidebarOpen && "Logout"}
+          </button>
         </div>
       </aside>
 
@@ -208,8 +222,8 @@ export default function AdminPage() {
                       return (
                         <div key={p.id} className="flex items-center gap-4">
                         <span className="text-[11px] font-mono text-[#A1A1AA] w-5">0{i + 1}</span>
-                        <div className="w-10 h-10 bg-[#F5F0EA] overflow-hidden flex-shrink-0">
-                          <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                        <div className="relative w-10 h-10 bg-[#F5F0EA] overflow-hidden flex-shrink-0">
+                          <Image src={p.image} alt={p.name} fill sizes="40px" className="object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-xs font-medium text-[#111111] truncate">{p.name}</p>
@@ -293,8 +307,8 @@ export default function AdminPage() {
                         <tr key={product.id} className="border-b border-[#F8F8F6] hover:bg-[#FAFAFA] transition-colors">
                         <td className="py-3.5 px-5">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-12 bg-[#F5F0EA] overflow-hidden flex-shrink-0">
-                              <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                            <div className="relative w-10 h-12 bg-[#F5F0EA] overflow-hidden flex-shrink-0">
+                              <Image src={product.image} alt={product.name} fill sizes="40px" className="object-cover" />
                             </div>
                             <div>
                               <p className="text-xs font-medium text-[#111111] line-clamp-1">{product.name}</p>

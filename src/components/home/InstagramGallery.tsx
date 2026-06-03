@@ -1,6 +1,7 @@
 "use client";
 
 import { instagramPosts } from "@/lib/data";
+import Image from "next/image";
 
 export default function InstagramGallery() {
   return (
@@ -17,11 +18,11 @@ export default function InstagramGallery() {
             </h2>
           </div>
           <p className="f-body lg:max-w-xs lg:ml-auto" style={{ fontSize: "13px" }}>
-            Portraits of the pieces in motion — worn, lived in, and loved.
+            Portraits of the pieces in motion - worn, lived in, and loved.
           </p>
         </div>
 
-        {/* Gallery — asymmetric grid */}
+        {/* Gallery ? asymmetric grid */}
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-1">
           {instagramPosts.slice(0, 6).map((image, i) => (
             <a
@@ -30,9 +31,11 @@ export default function InstagramGallery() {
               className="group relative overflow-hidden block"
               style={{ aspectRatio: i === 0 || i === 3 ? "1/1" : "1/1" }}
             >
-              <img
+              <Image
                 src={image}
                 alt={`ARINAS ${i + 1}`}
+                fill
+                sizes="(min-width: 1024px) 16vw, 33vw"
                 className="img-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
               />
               <div className="absolute inset-0 bg-[#0A0A0A]/0 group-hover:bg-[#0A0A0A]/30 transition-colors duration-700" />

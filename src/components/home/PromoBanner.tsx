@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
-// Campaign statement — brand manifesto, not a sale banner
+// Campaign statement ? brand manifesto, not a sale banner
 export default function PromoBanner() {
   return (
     <section className="relative overflow-hidden" style={{ height: "70vh", minHeight: "500px" }}>
-      <img
+      <Image
         src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=90"
         alt="ARINAS Campaign"
+        fill
+        sizes="100vw"
         className="img-cover"
         style={{ transform: "scale(1.02)" }}
       />
@@ -16,7 +19,7 @@ export default function PromoBanner() {
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
         <p className="f-label text-white/50 mb-8" style={{ fontSize: "9px", letterSpacing: "0.4em" }}>
-          Autumn — Winter 2025
+          Autumn / Winter 2025
         </p>
 
         <h2

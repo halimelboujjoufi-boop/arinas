@@ -216,6 +216,9 @@ $serverTargets = @("production", "preview")
 
 $envMap = @{
   NEXT_PUBLIC_SITE_URL = $clientTargets
+  ADMIN_EMAIL = $serverTargets
+  ADMIN_PASSWORD_HASH = $serverTargets
+  ADMIN_SESSION_SECRET = $serverTargets
   NEXT_PUBLIC_SUPABASE_URL = $clientTargets
   NEXT_PUBLIC_SUPABASE_ANON_KEY = $clientTargets
   SUPABASE_SERVICE_ROLE_KEY = $serverTargets

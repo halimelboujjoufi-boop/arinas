@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { X, ShoppingBag, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function QuickView() {
   const { state, dispatch } = useStore();
@@ -42,7 +43,7 @@ export default function QuickView() {
         className="relative bg-white w-full max-w-3xl shadow-2xl z-10 flex flex-col lg:flex-row overflow-hidden"
         style={{ maxHeight: "90vh" }}
       >
-        {/* Close button — top right, clear of all content */}
+        {/* Close button ? top right, clear of all content */}
         <button
           onClick={close}
           className="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-white hover:bg-[#0A0A0A] hover:text-white transition-colors border border-[#0A0A0A]/10"
@@ -51,15 +52,17 @@ export default function QuickView() {
           <X size={14} strokeWidth={1.5} />
         </button>
 
-        {/* ── Image panel ── */}
+        {/*  Image panel  */}
         <div className="lg:w-[42%] flex-shrink-0 bg-[#F5F2EC] relative overflow-hidden">
           {/* Aspect ratio container */}
           <div className="relative" style={{ paddingBottom: "133.33%", height: 0 }}>
             {images.map((src, i) => (
-              <img
+              <Image
                 key={i}
                 src={src}
                 alt={product.name}
+                fill
+                sizes="(min-width: 1024px) 42vw, 100vw"
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
                 style={{ opacity: i === currentImage ? 1 : 0 }}
               />
@@ -72,7 +75,7 @@ export default function QuickView() {
               className="absolute top-4 left-4 f-label text-white bg-[#B89A6A] px-3 py-1.5"
               style={{ fontSize: "9px", letterSpacing: "0.2em" }}
             >
-              −{discount}%
+              -{discount}%
             </span>
           )}
           {product.isNew && !discount && (
@@ -100,7 +103,7 @@ export default function QuickView() {
           )}
         </div>
 
-        {/* ── Info panel ── */}
+        {/*  Info panel  */}
         <div className="flex-1 overflow-y-auto flex flex-col">
           <div className="px-7 pt-8 pb-6 flex-1">
             {/* Category label */}
@@ -108,7 +111,7 @@ export default function QuickView() {
               {product.collection || product.category}
             </p>
 
-            {/* Product name — generous padding-right to avoid X button */}
+            {/* Product name ? generous padding-right to avoid X button */}
             <h2
               className="f-display text-[#0A0A0A] mb-5 pr-10"
               style={{ fontSize: "clamp(22px, 2.5vw, 32px)", lineHeight: 1.05 }}
@@ -145,7 +148,7 @@ export default function QuickView() {
                   Colour
                   {selectedColor && (
                     <span className="text-[#8A8680] ml-2" style={{ textTransform: "none", letterSpacing: 0 }}>
-                      — {selectedColor}
+                      ? {selectedColor}
                     </span>
                   )}
                 </p>
@@ -193,7 +196,7 @@ export default function QuickView() {
             )}
           </div>
 
-          {/* CTA — pinned at bottom with clear separation */}
+          {/* CTA ? pinned at bottom with clear separation */}
           <div className="px-7 pb-7 pt-5 border-t border-[#0A0A0A]/[0.07] space-y-3">
             <div className="flex gap-3">
               <button

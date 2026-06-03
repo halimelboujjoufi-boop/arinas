@@ -1,13 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Full-bleed hero */}
       <div className="relative overflow-hidden bg-[#0A0A0A] -mt-[128px] lg:-mt-[206px]" style={{ height: "calc(80vh + 206px)", minHeight: "560px" }}>
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1920&q=90"
           alt="The Maison"
+          fill
+          priority
+          sizes="100vw"
           className="img-cover"
           style={{ opacity: 0.6, transform: "scale(1.02)" }}
         />
@@ -15,7 +19,7 @@ export default function AboutPage() {
 
         <div className="absolute inset-0 flex flex-col justify-end pb-20 px-10 lg:px-20">
           <p className="f-label text-white/50 mb-6" style={{ fontSize: "9px", letterSpacing: "0.4em" }}>
-            Est. Paris — 2015
+            Est. Paris - 2015
           </p>
           <h1
             className="f-display text-white"
@@ -55,7 +59,7 @@ export default function AboutPage() {
                 haute couture and accessible luxury.
               </p>
               <p>
-                Every piece is selected with meticulous care — each garment a story of
+                Every piece is selected with meticulous care - each garment a story of
                 unparalleled craftsmanship, chosen not for trend, but for permanence.
               </p>
             </div>
@@ -105,9 +109,11 @@ export default function AboutPage() {
 
       {/* Campaign image */}
       <div className="relative overflow-hidden" style={{ height: "70vh" }}>
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1920&q=90"
           alt="Atelier"
+          fill
+          sizes="100vw"
           className="img-cover"
         />
         <div className="absolute inset-0 bg-black/30" />

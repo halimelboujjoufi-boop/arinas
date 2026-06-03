@@ -2,6 +2,7 @@
 
 import { useStore, useCartTotal } from "@/lib/store";
 import Link from "next/link";
+import Image from "next/image";
 import { Minus, Plus, X, ShoppingBag, ArrowRight } from "lucide-react";
 
 export default function CartPage() {
@@ -51,7 +52,7 @@ export default function CartPage() {
 
             {/* Items column */}
             <div className="lg:col-span-2">
-              {/* Column headers — desktop only */}
+              {/* Column headers ? desktop only */}
               <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-[#0A0A0A]/[0.08] mb-2">
                 <div className="col-span-6">
                   <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>Product</p>
@@ -73,8 +74,8 @@ export default function CartPage() {
                     {/* Mobile layout: stacked */}
                     <div className="flex gap-5">
                       {/* Thumbnail */}
-                      <Link href={`/product/${item.id}`} className="block flex-shrink-0 w-[90px] lg:w-[100px] bg-[#F5F2EC] overflow-hidden" style={{ aspectRatio: "3/4" }}>
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <Link href={`/product/${item.id}`} className="relative block flex-shrink-0 w-[90px] lg:w-[100px] bg-[#F5F2EC] overflow-hidden" style={{ aspectRatio: "3/4" }}>
+                        <Image src={item.image} alt={item.name} fill sizes="100px" className="object-cover" />
                       </Link>
 
                       {/* Info */}
@@ -95,7 +96,7 @@ export default function CartPage() {
                           )}
                         </div>
 
-                        {/* Price + qty + remove — responsive row */}
+                        {/* Price + qty + remove ? responsive row */}
                         <div className="flex flex-wrap items-center justify-between gap-3 mt-auto pt-2">
                           {/* Price */}
                           <span className="f-label text-[#0A0A0A]" style={{ fontSize: "13px", fontWeight: 400, letterSpacing: "0.04em" }}>
@@ -151,7 +152,7 @@ export default function CartPage() {
                   className="f-label text-[#8A8680] hover:text-[#0A0A0A] transition-colors flex items-center gap-2"
                   style={{ fontSize: "9px", letterSpacing: "0.2em" }}
                 >
-                  ← Continue Shopping
+                  ? Continue Shopping
                 </Link>
               </div>
             </div>
@@ -171,7 +172,7 @@ export default function CartPage() {
                   {discount > 0 && (
                     <div className="flex justify-between">
                       <span className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>Discount</span>
-                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "12px" }}>−${discount.toLocaleString()}</span>
+                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "12px" }}>-${discount.toLocaleString()}</span>
                     </div>
                   )}
                   <div className="flex justify-between">

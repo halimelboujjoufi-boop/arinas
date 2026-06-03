@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { lookbookItems } from "@/lib/data";
 import { useStore } from "@/lib/store";
 import { ArrowRight } from "lucide-react";
@@ -18,10 +19,12 @@ export default function LookbookSection() {
         {/* Image side */}
         <div className="relative overflow-hidden bg-[#0A0A0A] order-2 lg:order-1" style={{ minHeight: "60vh" }}>
           {lookbookItems.map((look, i) => (
-            <img
+            <Image
               key={look.id}
               src={look.image}
               alt={look.title}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="img-cover absolute inset-0 transition-opacity duration-1000"
               style={{ opacity: i === active ? 1 : 0, transform: "scale(1.02)" }}
             />
@@ -32,6 +35,7 @@ export default function LookbookSection() {
             {lookbookItems.map((_, i) => (
               <button
                 key={i}
+                aria-label={`Show look ${i + 1}`}
                 onClick={() => setActive(i)}
                 className={`transition-all duration-400 ${
                   i === active ? "w-10 h-0.5 bg-white" : "w-3 h-0.5 bg-white/30 hover:bg-white/60"
@@ -45,7 +49,7 @@ export default function LookbookSection() {
         <div className="bg-[#FAF9F7] flex flex-col justify-center px-6 py-12 lg:px-20 lg:py-20 order-1 lg:order-2">
           <ScrollReveal delay={0}>
             <p className="f-label text-[#B89A6A] mb-8" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              The Lookbook — Look {String(active + 1).padStart(2, "0")}
+              The Lookbook / Look {String(active + 1).padStart(2, "0")}
             </p>
           </ScrollReveal>
 
@@ -65,7 +69,7 @@ export default function LookbookSection() {
           <ScrollReveal delay={240}>
             <p className="f-body mb-12" style={{ maxWidth: "380px" }}>
               A studied composition of form and restraint.
-              Each piece selected for how it speaks to the whole —
+              Each piece selected for how it speaks to the whole -
               never competing, always completing.
             </p>
           </ScrollReveal>
@@ -74,10 +78,12 @@ export default function LookbookSection() {
             {item.products.map((product, i) => (
               <ScrollReveal key={product.id} delay={300 + i * 80}>
                 <div className="flex items-center gap-4 group">
-                  <Link href={`/product/${product.id}`} className="w-14 overflow-hidden bg-[#EDE8DF] flex-shrink-0 block" style={{ height: "72px" }}>
-                    <img
+                  <Link href={`/product/${product.id}`} className="relative w-14 overflow-hidden bg-[#EDE8DF] flex-shrink-0 block" style={{ height: "72px" }}>
+                    <Image
                       src={product.image}
                       alt={product.name}
+                      fill
+                      sizes="56px"
                       className="img-cover transition-transform duration-700 group-hover:scale-110"
                     />
                   </Link>

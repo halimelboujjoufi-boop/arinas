@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { Cormorant_Garamond, Inter, Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/lib/store";
 import Header from "@/components/layout/Header";
@@ -25,6 +26,84 @@ const OG_LOCALE: Record<Locale, string> = {
   ar: "ar_AE",
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://arinas.com";
+const ogImage = "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=630&q=90";
+
+const pageMeta: Array<{ match: RegExp; title: string; description: string }> = [
+  {
+    match: /^\/shop/,
+    title: "Shop Luxury Fashion",
+    description: "Shop curated designer dresses, abayas, tailoring, accessories, and luxury essentials from ARINAS.",
+  },
+  {
+    match: /^\/collections/,
+    title: "Luxury Collections",
+    description: "Explore ARINAS luxury collections, seasonal edits, limited pieces, and couture-inspired wardrobes.",
+  },
+  {
+    match: /^\/product/,
+    title: "Luxury Product Detail",
+    description: "Discover ARINAS product details, refined materials, available sizes, styling notes, and luxury service.",
+  },
+  {
+    match: /^\/new-arrivals/,
+    title: "New Arrivals",
+    description: "Discover the newest ARINAS luxury fashion arrivals and seasonal statement pieces.",
+  },
+  {
+    match: /^\/about/,
+    title: "About ARINAS",
+    description: "Learn about the ARINAS maison, our curation philosophy, and our approach to enduring luxury.",
+  },
+  {
+    match: /^\/contact/,
+    title: "Contact ARINAS",
+    description: "Contact ARINAS client care for styling, orders, private appointments, and luxury service.",
+  },
+  {
+    match: /^\/cart/,
+    title: "Shopping Bag",
+    description: "Review your ARINAS shopping bag and prepare your luxury fashion order.",
+  },
+  {
+    match: /^\/checkout/,
+    title: "Secure Checkout",
+    description: "Complete your ARINAS order with secure checkout, gift options, and premium delivery.",
+  },
+  {
+    match: /^\/wishlist/,
+    title: "Wishlist",
+    description: "Review your saved ARINAS luxury fashion pieces.",
+  },
+  {
+    match: /^\/admin/,
+    title: "Admin",
+    description: "Protected ARINAS administration panel.",
+  },
+];
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-noto-naskh-arabic",
+  display: "swap",
+});
+
 async function resolveLocale(): Promise<{ locale: Locale; path: string }> {
   const h = await headers();
   const headerLocale = h.get("x-locale");
@@ -36,6 +115,9 @@ async function resolveLocale(): Promise<{ locale: Locale; path: string }> {
 export async function generateMetadata(): Promise<Metadata> {
   const { locale, path } = await resolveLocale();
   const dict = await getDictionary(locale);
+  const matchedMeta = pageMeta.find((item) => item.match.test(path));
+  const title = matchedMeta?.title ?? dict.meta.title;
+  const description = matchedMeta?.description ?? dict.meta.description;
 
   // hreflang alternates for every supported locale + x-default.
   const languages: Record<string, string> = {};
@@ -43,36 +125,49 @@ export async function generateMetadata(): Promise<Metadata> {
   languages["x-default"] = `/${defaultLocale}${path === "/" ? "" : path}`;
 
   return {
-    title: { default: dict.meta.title, template: "%s | ARINAS" },
-    description: dict.meta.description,
+    title: { default: title, template: "%s | ARINAS" },
+    description,
     keywords: ["luxury fashion", "couture", "designer clothing", "ARINAS", "high-end fashion"],
     authors: [{ name: "ARINAS" }],
     creator: "ARINAS",
-    metadataBase: new URL("https://arinas.com"),
+    metadataBase: new URL(siteUrl),
     alternates: {
       canonical: `/${locale}${path === "/" ? "" : path}`,
       languages,
     },
     openGraph: {
-      title: dict.meta.title,
-      description: dict.meta.description,
+      title,
+      description,
       type: "website",
       locale: OG_LOCALE[locale],
       siteName: "ARINAS",
+      url: `/${locale}${path === "/" ? "" : path}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: "ARINAS luxury fashion editorial campaign",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: dict.meta.title,
-      description: dict.meta.description,
+      title,
+      description,
+      images: [ogImage],
     },
-    robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+    robots: path.startsWith("/admin")
+      ? { index: false, follow: false, googleBot: { index: false, follow: false } }
+      : { index: true, follow: true, googleBot: { index: true, follow: true } },
   };
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { locale } = await resolveLocale();
+  const { locale, path } = await resolveLocale();
   const dict = await getDictionary(locale);
   const dir = getDir(locale);
+  const isAdmin = path === "/admin" || path.startsWith("/admin/");
   const schemaOrg = {
     "@context": "https://schema.org",
     "@type": "ClothingStore",
@@ -104,26 +199,26 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
-      <body className="antialiased">
+      <body className={`${inter.variable} ${cormorant.variable} ${notoNaskhArabic.variable} antialiased`}>
         <I18nProvider locale={locale} dict={dict}>
-          <StoreProvider>
-            <Header />
-            <main className="min-h-screen pb-16 lg:pb-0 pt-[128px] lg:pt-[206px]">{children}</main>
-            <Footer />
-            <CartDrawer />
-            <SearchOverlay />
-            <QuickView />
-            <MobileNav />
-          </StoreProvider>
+          {isAdmin ? (
+            children
+          ) : (
+            <StoreProvider>
+              <Header />
+              <main className="min-h-screen pb-16 lg:pb-0 pt-[128px] lg:pt-[206px]">{children}</main>
+              <Footer />
+              <CartDrawer />
+              <SearchOverlay />
+              <QuickView />
+              <MobileNav />
+            </StoreProvider>
+          )}
         </I18nProvider>
       </body>
     </html>

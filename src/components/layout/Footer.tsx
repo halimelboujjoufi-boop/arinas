@@ -17,7 +17,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0A0A0A] text-white">
-      {/* Upper — brand statement + newsletter */}
+      {/* Upper ? brand statement + newsletter */}
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14 pt-24 pb-16">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
           {/* Brand */}
@@ -34,7 +34,7 @@ export default function Footer() {
               A house built on the premise that true luxury lies in the singular, the rare, and the enduring.
             </p>
 
-            {/* Social — minimal text */}
+            {/* Social ? minimal text */}
             <div className="flex gap-5 mt-8">
               {["IG", "FB", "X", "YT"].map((s) => (
                 <a
@@ -117,7 +117,7 @@ export default function Footer() {
                   className="f-label text-[#B89A6A] hover:text-white transition-colors"
                   style={{ fontSize: "9px", letterSpacing: "0.25em" }}
                 >
-                  Subscribe →
+                  Subscribe
                 </button>
               </form>
             )}
@@ -129,7 +129,7 @@ export default function Footer() {
       <div className="border-t border-white/[0.07]">
         <div className="max-w-[1680px] mx-auto px-6 lg:px-14 py-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           <p className="f-label text-white/25" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
-            © 2025 ARINAS — 12 Rue de la Paix, Paris
+            2025 ARINAS - 12 Rue de la Paix, Paris
           </p>
           <div className="flex gap-6">
             {["Privacy", "Terms", "Cookies"].map((item) => (

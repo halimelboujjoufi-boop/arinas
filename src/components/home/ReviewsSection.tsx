@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { reviews } from "@/lib/data";
+import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function ReviewsSection() {
@@ -37,8 +38,8 @@ export default function ReviewsSection() {
 
             <ScrollReveal delay={350} direction="fade">
               <div className="mt-10 flex items-center gap-6">
-                <div className="w-10 h-10 overflow-hidden bg-[#1A1A1A]">
-                  <img src={review.avatar} alt={review.name} className="img-cover" />
+                <div className="relative w-10 h-10 overflow-hidden bg-[#1A1A1A]">
+                  <Image src={review.avatar} alt={review.name} fill sizes="40px" className="img-cover" />
                 </div>
                 <div>
                   <p className="f-label text-white" style={{ fontSize: "10px", letterSpacing: "0.15em" }}>
@@ -63,6 +64,7 @@ export default function ReviewsSection() {
                 {reviews.map((_, i) => (
                   <button
                     key={i}
+                    aria-label={`Show review ${i + 1}`}
                     onClick={() => setActive(i)}
                     className={`transition-all duration-400 ${
                       i === active ? "w-10 h-0.5 bg-white" : "w-3 h-0.5 bg-white/20 hover:bg-white/50"

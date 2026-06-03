@@ -6,9 +6,9 @@ export const products: Product[] = [
     name: "Silk Draped Evening Gown",
     price: 2850,
     originalPrice: 3400,
-    image: "https://images.unsplash.com/photo-1566479179817-d9e9e50c8f14?w=800&q=90",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90",
     images: [
-      "https://images.unsplash.com/photo-1566479179817-d9e9e50c8f14?w=800&q=90",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=90",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=90",
       "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=90",
     ],
@@ -289,7 +289,7 @@ export const reviews = [
     name: "Sophia Laurent",
     location: "Paris, France",
     rating: 5,
-    comment: "Absolutely exceptional quality. The silk gown exceeded every expectation — the craftsmanship is impeccable. ARINAS has become my go-to for special occasions.",
+    comment: "Absolutely exceptional quality. The silk gown exceeded every expectation - the craftsmanship is impeccable. ARINAS has become my go-to for special occasions.",
     date: "March 2025",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=90",
     product: "Silk Draped Evening Gown",
@@ -459,7 +459,7 @@ export const translations = {
   },
   ar: {
     nav: {
-      home: "الرئيسية", shop: "المتجر", newArrivals: "وصل حديثاً",
+      home: "الرئيسية", shop: "المتجر", newArrivals: "وصل حديثا",
       collections: "المجموعات", sale: "تخفيضات", about: "من نحن", contact: "اتصل بنا",
     },
     hero: {

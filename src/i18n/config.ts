@@ -1,4 +1,4 @@
-// Central i18n configuration — shared by the proxy, layout, and client.
+// Central i18n configuration shared by the proxy, layout, and client.
 
 export const locales = ["en", "fr", "ar"] as const;
 export type Locale = (typeof locales)[number];

@@ -1,6 +1,7 @@
 import { products, collections } from "@/lib/data";
 import ProductCard from "@/components/ui/ProductCard";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export default async function CollectionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -19,12 +20,15 @@ export default async function CollectionPage({ params }: { params: Promise<{ id:
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero — full-bleed with overlay text */}
+      {/* Hero ? full-bleed with overlay text */}
       <div className="relative overflow-hidden" style={{ height: "55vh", minHeight: "380px" }}>
-        <img
-          src={col?.image}
-          alt={col?.name}
-          className="w-full h-full object-cover"
+        <Image
+          src={col?.image || ""}
+          alt={col?.name || collectionName}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
           style={{ filter: "brightness(0.55)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />

@@ -5,6 +5,7 @@ import { useStore } from "@/lib/store";
 import { Search, X, ArrowRight } from "lucide-react";
 import { products } from "@/lib/data";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SearchOverlay() {
   const { state, dispatch } = useStore();
@@ -64,7 +65,7 @@ export default function SearchOverlay() {
             <input
               ref={inputRef}
               type="text"
-              placeholder="Silk dresses, abayas, accessories…"
+              placeholder="Silk dresses, abayas, accessories&"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Escape" && close()}
@@ -72,7 +73,7 @@ export default function SearchOverlay() {
               style={{ fontSize: "18px", fontFamily: "Cormorant Garamond, serif", fontWeight: 300 }}
             />
             {query && (
-              <button onClick={() => setQuery("")} className="text-[#8A8680] hover:text-[#0A0A0A] transition-colors flex-shrink-0">
+              <button aria-label="Clear search" onClick={() => setQuery("")} className="text-[#8A8680] hover:text-[#0A0A0A] transition-colors flex-shrink-0">
                 <X size={14} strokeWidth={1.5} />
               </button>
             )}
@@ -91,8 +92,8 @@ export default function SearchOverlay() {
                 onClick={close}
                 className="flex items-center gap-5 py-4 border-b border-[#EAE6E0] hover:bg-[#FAF9F7] -mx-4 px-4 transition-colors group"
               >
-                <div className="w-12 h-14 bg-[#F5F2EC] overflow-hidden flex-shrink-0">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                <div className="relative w-12 h-14 bg-[#F5F2EC] overflow-hidden flex-shrink-0">
+                  <Image src={product.image} alt={product.name} fill sizes="48px" className="object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="f-label text-[#B89A6A] mb-0.5" style={{ fontSize: "8px", letterSpacing: "0.2em" }}>

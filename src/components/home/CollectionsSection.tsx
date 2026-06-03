@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { collections } from "@/lib/data";
 import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -34,9 +35,11 @@ export default function CollectionsSection() {
                 onMouseEnter={() => setActive(col.id)}
                 onMouseLeave={() => setActive(null)}
               >
-                <img
+                <Image
                   src={col.image}
                   alt={col.name}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, 50vw"
                   className="img-cover transition-all duration-[1.6s] ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{
                     transform: active === col.id ? "scale(1.08)" : "scale(1.02)",
@@ -50,7 +53,7 @@ export default function CollectionsSection() {
                       className="f-label text-white/40 mb-2 transition-colors duration-300 group-hover:text-[#B89A6A]"
                       style={{ fontSize: "9px", letterSpacing: "0.25em" }}
                     >
-                      {String(i + 1).padStart(2, "0")} — {col.count} Pieces
+                      {String(i + 1).padStart(2, "0")} / {col.count} Pieces
                     </p>
                     <h3
                       className="f-display text-white transition-all duration-500"
@@ -75,7 +78,7 @@ export default function CollectionsSection() {
                       style={{ opacity: active === col.id ? 1 : 0 }}
                     >
                       <span className="f-label text-[#B89A6A]" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>
-                        Explore →
+                        Explore
                       </span>
                     </div>
                   </div>

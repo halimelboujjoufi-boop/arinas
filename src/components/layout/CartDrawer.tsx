@@ -3,6 +3,7 @@
 import { useStore, useCartTotal } from "@/lib/store";
 import { X, Minus, Plus, ShoppingBag, ArrowRight, Gift, Truck } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CartDrawer() {
   const { state, dispatch } = useStore();
@@ -37,7 +38,7 @@ export default function CartDrawer() {
               </p>
             </div>
           </div>
-          <button onClick={() => dispatch({ type: "CLOSE_CART" })} className="p-1.5 hover:text-[#C9A86A] transition-colors">
+          <button aria-label="Close cart" onClick={() => dispatch({ type: "CLOSE_CART" })} className="p-1.5 hover:text-[#C9A86A] transition-colors">
             <X size={18} />
           </button>
         </div>
@@ -85,11 +86,13 @@ export default function CartDrawer() {
                   <Link
                     href={`/product/${item.id}`}
                     onClick={() => dispatch({ type: "CLOSE_CART" })}
-                    className="w-[88px] h-[110px] bg-[#F5F0EA] flex-shrink-0 overflow-hidden block"
+                    className="relative w-[88px] h-[110px] bg-[#F5F0EA] flex-shrink-0 overflow-hidden block"
                   >
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.name}
+                      fill
+                      sizes="88px"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </Link>
@@ -110,6 +113,7 @@ export default function CartDrawer() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 border border-[#E4E4E7]">
                         <button
+                          aria-label={`Decrease quantity of ${item.name}`}
                           onClick={() =>
                             item.quantity > 1
                               ? dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, quantity: item.quantity - 1 } })
@@ -121,6 +125,7 @@ export default function CartDrawer() {
                         </button>
                         <span className="text-xs font-medium w-5 text-center">{item.quantity}</span>
                         <button
+                          aria-label={`Increase quantity of ${item.name}`}
                           onClick={() => dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, quantity: item.quantity + 1 } })}
                           className="w-7 h-7 flex items-center justify-center hover:bg-[#F5F0EA] transition-colors"
                         >
@@ -132,6 +137,7 @@ export default function CartDrawer() {
                           ${(item.price * item.quantity).toLocaleString()}
                         </span>
                         <button
+                          aria-label={`Remove ${item.name} from cart`}
                           onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: item.id })}
                           className="text-[#D4D4D8] hover:text-[#111111] transition-colors"
                         >

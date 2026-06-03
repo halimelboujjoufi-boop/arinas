@@ -8,7 +8,7 @@
     "build:ci": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "verify": "npm run lint && npm run typecheck && npm run build:ci",
     "deploy:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-deployment.ps1"
   },

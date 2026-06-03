@@ -7,15 +7,16 @@ import { notFound } from "next/navigation";
 import { Heart, ChevronDown, X, ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ui/ProductCard";
 import Link from "next/link";
+import Image from "next/image";
 
 const sizeGuideData = {
   headers: ["Size", "UK", "EU", "Bust", "Waist", "Hip"],
   rows: [
-    ["XS", "6", "34", "81–84", "61–64", "87–90"],
-    ["S", "8", "36", "85–88", "65–68", "91–94"],
-    ["M", "10", "38", "89–92", "69–72", "95–98"],
-    ["L", "12", "40", "93–96", "73–76", "99–102"],
-    ["XL", "14", "42", "97–100", "77–80", "103–106"],
+    ["XS", "6", "34", "81-84", "61-64", "87-90"],
+    ["S", "8", "36", "85-88", "65-68", "91-94"],
+    ["M", "10", "38", "89-92", "69-72", "95-98"],
+    ["L", "12", "40", "93-96", "73-76", "99-102"],
+    ["XL", "14", "42", "97-100", "77-80", "103-106"],
   ],
 };
 
@@ -41,7 +42,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   useEffect(() => {
     dispatch({ type: "ADD_RECENTLY_VIEWED", payload: product });
-  }, [product.id]);
+  }, [dispatch, product]);
 
   const handleAddToCart = () => {
     if (product.sizes && !selectedSize) return;
@@ -62,12 +63,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       label: "Composition & Details",
       content: (
         <div className="space-y-3 f-body" style={{ fontSize: "12px", lineHeight: 1.9 }}>
-          <p>{product.description || "A studied composition of form and restraint. Each element selected for how it speaks to the whole — never competing, always completing."}</p>
+          <p>{product.description || "A studied composition of form and restraint. Each element selected for how it speaks to the whole - never competing, always completing."}</p>
           <ul className="space-y-1 mt-4">
             <li>Material: {product.material || "100% Silk Georgette"}</li>
             <li>Lining: 100% Silk</li>
             <li>Made in France</li>
-            <li>Model wears size S — height 177cm</li>
+            <li>Model wears size S - height 177cm</li>
           </ul>
         </div>
       ),
@@ -91,7 +92,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       label: "Delivery & Returns",
       content: (
         <div className="f-body space-y-2" style={{ fontSize: "12px" }}>
-          <p>Complimentary shipping on all orders over $500. Express delivery within 2–3 business days.</p>
+          <p>Complimentary shipping on all orders over $500. Express delivery within 2-3 business days.</p>
           <p className="mt-3">Free returns within 30 days. Items must be unworn with original tags attached.</p>
         </div>
       ),
@@ -104,9 +105,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14 pt-4 pb-0">
         <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
           <Link href="/" className="hover:text-[#B89A6A] transition-colors">Home</Link>
-          {" · "}
+          {" / "}
           <Link href="/shop" className="hover:text-[#B89A6A] transition-colors">{product.category}</Link>
-          {" · "}
+          {" / "}
           <span className="text-[#0A0A0A]">{product.name}</span>
         </p>
       </div>
@@ -115,22 +116,25 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14 py-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
 
-          {/* Images — left */}
+          {/* Images ? left */}
           <div>
             {/* Main image */}
             <div
               className="relative overflow-hidden bg-[#F5F2EC] mb-3"
               style={{ aspectRatio: "3/4" }}
             >
-              <img
+              <Image
                 src={images[currentImage]}
                 alt={product.name}
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="img-cover transition-transform duration-[1.6s] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{ transform: "scale(1.01)" }}
               />
               {discount && (
                 <span className="absolute top-5 left-5 f-label text-white bg-[#B89A6A] px-3 py-1.5" style={{ fontSize: "9px" }}>
-                  −{discount}%
+                  -{discount}%
                 </span>
               )}
               {product.isNew && !discount && (
@@ -153,14 +157,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       outline: i === currentImage ? "1px solid #B89A6A" : "1px solid transparent",
                     }}
                   >
-                    <img src={img} alt="" className="img-cover transition-opacity duration-300" style={{ opacity: i === currentImage ? 1 : 0.6 }} />
+                    <Image
+                      src={img}
+                      alt={`${product.name} thumbnail ${i + 1}`}
+                      fill
+                      sizes="(min-width: 1024px) 12vw, 25vw"
+                      className="img-cover transition-opacity duration-300"
+                      style={{ opacity: i === currentImage ? 1 : 0.6 }}
+                    />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Product info — right, sticky */}
+          {/* Product info ? right, sticky */}
           <div className="lg:sticky lg:top-[222px] lg:self-start">
             {/* Collection label */}
             <p className="f-label text-[#B89A6A] mb-3" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
@@ -188,7 +199,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             {product.colors && (
               <div className="mb-7">
                 <p className="f-label text-[#0A0A0A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>
-                  Colour — <span className="text-[#8A8680]" style={{ textTransform: "none", letterSpacing: 0 }}>{selectedColor || "Select"}</span>
+                  Colour: <span className="text-[#8A8680]" style={{ textTransform: "none", letterSpacing: 0 }}>{selectedColor || "Select"}</span>
                 </p>
                 <div className="flex gap-3">
                   {product.colors.map((color) => (

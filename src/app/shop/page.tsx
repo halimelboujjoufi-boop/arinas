@@ -36,9 +36,9 @@ export default function ShopPage() {
 
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14">
         {/* Toolbar */}
-        <div className="flex items-center justify-between pb-8 border-b border-[#0A0A0A]/[0.08] mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 pb-8 border-b border-[#0A0A0A]/[0.08] mb-12">
           {/* Category filters */}
-          <div className="flex items-center gap-1 overflow-x-auto scrollbar-none">
+          <div className="flex items-center flex-wrap gap-x-1 gap-y-3 w-full lg:w-auto min-w-0">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -61,7 +61,7 @@ export default function ShopPage() {
           </div>
 
           {/* Sort */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2 flex-shrink-0 justify-end">
             <p className="f-label text-[#8A8680] hidden lg:block" style={{ fontSize: "9px", letterSpacing: "0.15em" }}>
               Sort
             </p>
@@ -74,8 +74,8 @@ export default function ShopPage() {
               >
                 <option value="featured">Featured</option>
                 <option value="newest">Newest</option>
-                <option value="price-asc">Price ↑</option>
-                <option value="price-desc">Price ↓</option>
+                <option value="price-asc">Price low to high</option>
+                <option value="price-desc">Price high to low</option>
               </select>
               <ChevronDown size={10} className="absolute right-0 top-1/2 -translate-y-1/2 text-[#8A8680] pointer-events-none" />
             </div>
@@ -85,7 +85,7 @@ export default function ShopPage() {
         {/* Count */}
         <p className="f-label text-[#8A8680] mb-10" style={{ fontSize: "9px", letterSpacing: "0.15em" }}>
           {filtered.length} piece{filtered.length !== 1 ? "s" : ""}
-          {selectedCategory !== "All" ? ` — ${selectedCategory}` : ""}
+          {selectedCategory !== "All" ? ` - ${selectedCategory}` : ""}
         </p>
 
         {/* Grid */}

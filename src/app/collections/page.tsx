@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { collections } from "@/lib/data";
 
 export default function CollectionsPage() {
@@ -23,9 +24,11 @@ export default function CollectionsPage() {
             className="group relative overflow-hidden block"
             style={{ aspectRatio: "4/3" }}
           >
-            <img
+            <Image
               src={col.image}
               alt={col.name}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="img-cover transition-all duration-[1.6s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
               style={{ filter: "brightness(0.55)" }}
             />

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function EditorialSection() {
@@ -8,9 +9,11 @@ export default function EditorialSection() {
     <section className="relative">
       {/* Full-bleed campaign image */}
       <div className="relative w-full overflow-hidden" style={{ height: "85vh", minHeight: "600px" }}>
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&q=90"
           alt="The Edit"
+          fill
+          sizes="100vw"
           className="img-cover"
           style={{ transform: "scale(1.02)" }}
         />
@@ -20,7 +23,7 @@ export default function EditorialSection() {
           <div className="px-10 lg:px-20 max-w-2xl">
             <ScrollReveal delay={200} direction="fade">
               <p className="f-label text-white/40 mb-8" style={{ fontSize: "9px", letterSpacing: "0.35em" }}>
-                The Summer Edit — 2025
+                The Summer Edit / 2025
               </p>
             </ScrollReveal>
 
@@ -38,7 +41,7 @@ export default function EditorialSection() {
 
             <ScrollReveal delay={450} direction="up">
               <p className="f-body text-white/60 mb-10 max-w-sm" style={{ lineHeight: 1.8, fontSize: "13px" }}>
-                A collection that moves between morning light and evening shadow —
+                A collection that moves between morning light and evening shadow -
                 refined pieces that speak without announcement.
               </p>
             </ScrollReveal>
@@ -58,7 +61,7 @@ export default function EditorialSection() {
 
         <div className="absolute bottom-6 right-8 text-right hidden lg:block">
           <p className="f-label text-white/25" style={{ fontSize: "8px", letterSpacing: "0.2em" }}>
-            Campaign — Paris, June 2025
+            Campaign - Paris, June 2025
           </p>
         </div>
       </div>
@@ -86,7 +89,7 @@ export default function EditorialSection() {
               <p className="f-body" style={{ fontSize: "12px", lineHeight: 1.8 }}>
                 Each ARINAS piece begins with a question: what is essential?
                 What remains when everything superfluous is removed?
-                The answer is always the same — something rare and true.
+                The answer is always the same: something rare and true.
               </p>
             </ScrollReveal>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { products } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
 import { useStore } from "@/lib/store";
@@ -9,7 +10,6 @@ import { Heart } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function NewArrivals() {
-  const { state, dispatch } = useStore();
   const arrivals = products.filter((p) => p.isNew).slice(0, 5);
   const [hero, ...rest] = arrivals;
 
@@ -88,16 +88,20 @@ function EditorialCard({ product, large = false }: { product: (typeof products)[
         className="relative overflow-hidden bg-[#F5F2EC]"
         style={{ aspectRatio: large ? "4/5" : "3/4" }}
       >
-        <img
+        <Image
           src={product.image}
           alt={product.name}
+          fill
+          sizes={large ? "(min-width: 1024px) 42vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
           className="img-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ transform: hovered ? "scale(1.06)" : "scale(1)" }}
         />
         {product.images?.[1] && (
-          <img
+          <Image
             src={product.images[1]}
             alt={product.name}
+            fill
+            sizes={large ? "(min-width: 1024px) 42vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
             className="img-cover absolute inset-0 transition-opacity duration-700"
             style={{ opacity: hovered ? 1 : 0 }}
           />
@@ -105,7 +109,7 @@ function EditorialCard({ product, large = false }: { product: (typeof products)[
 
         {product.badge === "SALE" && discount && (
           <span className="absolute top-4 left-4 f-label text-white bg-[#B89A6A] px-3 py-1.5" style={{ fontSize: "9px" }}>
-            −{discount}%
+            -{discount}%
           </span>
         )}
         {product.isNew && product.badge !== "SALE" && (

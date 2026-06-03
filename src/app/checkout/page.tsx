@@ -1,13 +1,14 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useStore, useCartTotal } from "@/lib/store";
 import { COUPON_CODES } from "@/lib/data";
 import {
   Shield, Lock, Check, Truck, CreditCard, Smartphone,
-  Tag, X, ChevronDown, ArrowRight, Gift
+  Tag, X, ChevronDown, Gift
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 type PaymentMethod = "card" | "applepay" | "paypal";
 
@@ -310,7 +311,7 @@ export default function CheckoutPage() {
                 className="w-full bg-[#B89A6A] text-white text-[11px] tracking-[0.3em] uppercase py-5 hover:bg-[#B8963A] transition-colors flex items-center justify-center gap-3 font-medium"
               >
                 <Lock size={14} />
-                Place Order — ${total.toLocaleString()}
+                Place Order - ${total.toLocaleString()}
               </button>
 
               <p className="text-[10px] text-[#8A8680] text-center flex items-center justify-center gap-1.5">
@@ -343,7 +344,7 @@ export default function CheckoutPage() {
                       {state.cart.map((item) => (
                         <div key={`${item.id}-${item.selectedSize}`} className="flex gap-3">
                           <div className="relative w-16 h-20 flex-shrink-0 bg-[#F5F2EC]">
-                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                            <Image src={item.image} alt={item.name} fill sizes="64px" className="object-cover" />
                             <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-[#0A0A0A] text-white text-[9px] rounded-full flex items-center justify-center font-medium">
                               {item.quantity}
                             </span>

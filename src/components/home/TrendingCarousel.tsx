@@ -38,12 +38,14 @@ export default function TrendingCarousel() {
           </div>
           <div className="hidden lg:flex items-center gap-3">
             <button
+              aria-label="Scroll trending products backward"
               onClick={() => scroll("left")}
               className="w-10 h-10 border border-[#0A0A0A]/20 flex items-center justify-center hover:border-[#0A0A0A] transition-colors"
             >
               <ArrowRight size={14} strokeWidth={1.5} className="rotate-180" />
             </button>
             <button
+              aria-label="Scroll trending products forward"
               onClick={() => scroll("right")}
               className={`w-10 h-10 border flex items-center justify-center transition-colors ${
                 canScrollRight ? "border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white" : "border-[#0A0A0A]/20 text-[#0A0A0A]/20"
@@ -54,7 +56,7 @@ export default function TrendingCarousel() {
           </div>
         </div>
 
-        {/* Scrollable row — slightly peeking on edges */}
+        {/* Scrollable row ? slightly peeking on edges */}
         <div
           ref={scrollRef}
           onScroll={handleScroll}
