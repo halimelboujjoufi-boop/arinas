@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { Lock, Mail, ArrowRight } from "lucide-react";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 function getNextPath(): string {
   if (typeof window === "undefined") return "/admin";
@@ -20,20 +21,25 @@ export default function LoginForm() {
     setPending(true);
     setError("");
 
-    const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
 
-    if (res.ok) {
+      if (signInError) {
+        setError(signInError.message || "Invalid email or password.");
+        setPending(false);
+        return;
+      }
+
+      // Full reload so the server-side guard re-reads the new session cookies.
       window.location.assign(getNextPath());
-      return;
+    } catch {
+      setError("Unable to sign in. Please try again.");
+      setPending(false);
     }
-
-    const body = (await res.json().catch(() => null)) as { error?: string } | null;
-    setError(body?.error || "Unable to sign in.");
-    setPending(false);
   };
 
   return (

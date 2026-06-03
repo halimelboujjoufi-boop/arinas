@@ -1,11 +1,11 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ADMIN_SESSION_COOKIE, verifyAdminSessionToken } from "@/lib/admin-auth";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { isAdminUser } from "@/lib/admin-access";
 
-// Server-side guard for the admin dashboard. Runs on every render,
-// independent of the proxy/middleware — so the dashboard can never be
-// reached without a valid, signed admin session cookie. The login page
-// lives outside this route group, so it is not affected (no redirect loop).
+// Server-side guard for the admin dashboard. Runs on every render and
+// verifies the Supabase session + admin role. Fails closed: any error
+// (misconfiguration, expired/invalid session) redirects to the login page.
+// The login page lives outside this route group, so there is no loop.
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardLayout({
@@ -13,10 +13,18 @@ export default async function AdminDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const token = (await cookies()).get(ADMIN_SESSION_COOKIE)?.value;
-  const isAuthenticated = await verifyAdminSessionToken(token);
+  try {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  if (!isAuthenticated) {
+    if (!isAdminUser(user)) {
+      redirect("/admin/login");
+    }
+  } catch (error) {
+    // `redirect()` throws a control-flow signal — re-throw it untouched.
+    if (error && typeof error === "object" && "digest" in error) throw error;
     redirect("/admin/login");
   }
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { products as seedProducts } from "@/lib/data";
 import type { Product } from "@/lib/store";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const PRODUCTS_STORAGE_KEY = "arinas_admin_products";
 
@@ -146,7 +147,10 @@ export default function AdminPage() {
   );
 
   const handleLogout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" });
+    try {
+      const supabase = createSupabaseBrowserClient();
+      await supabase.auth.signOut();
+    } catch {}
     window.location.assign("/admin/login");
   };
 
