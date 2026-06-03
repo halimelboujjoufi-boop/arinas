@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "ARINAS — Mode de Luxe",
+    "description": "Découvrez ARINAS, une destination de mode de luxe soigneusement sélectionnée. Achetez les plus belles pièces de couture des ateliers les plus prestigieux du monde."
+  },
+  "announcement": [
+    "Livraison offerte dès 500 $  ·  Retours gratuits sous 30 jours",
+    "Nouveautés : Collection Été 2025 — Découvrir",
+    "Emballage cadeau offert sur toutes les commandes"
+  ],
+  "nav": {
+    "newArrivals": "Nouveautés",
+    "women": "Femme",
+    "dresses": "Robes",
+    "abayas": "Abayas",
+    "collections": "Collections",
+    "sale": "Soldes",
+    "accessories": "Accessoires",
+    "contact": "Contact"
+  },
+  "account": {
+    "search": "Rechercher",
+    "account": "Compte",
+    "wishlist": "Favoris",
+    "bag": "Panier",
+    "signIn": "Se connecter",
+    "createAccount": "Créer un compte",
+    "myOrders": "Mes commandes",
+    "myWishlist": "Mes favoris",
+    "language": "Langue"
+  },
+  "shortcuts": {
+    "freeShipping": "Livraison Offerte",
+    "freeShippingSub": "Dès 500 $ d'achat",
+    "securePayment": "Paiement Sécurisé",
+    "securePaymentSub": "Paiement chiffré",
+    "freeReturns": "Retours Gratuits",
+    "freeReturnsSub": "Sous 30 jours",
+    "authenticity": "Authenticité",
+    "authenticitySub": "Garantie d'origine"
+  },
+  "footer": {
+    "tagline": "Une maison fondée sur l'idée que le vrai luxe réside dans le singulier, le rare et l'intemporel.",
+    "house": "La Maison",
+    "clientCare": "Service Client",
+    "circle": "Le Cercle",
+    "circleText": "Accès privé aux nouveautés et aux événements exclusifs.",
+    "emailPlaceholder": "Votre e-mail",
+    "subscribe": "S'abonner",
+    "welcome": "Bienvenue dans le Cercle.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "cookies": "Cookies"
+  },
+  "common": {
+    "discover": "Découvrir la Collection",
+    "addToBag": "Ajouter au Panier",
+    "quickView": "Aperçu Rapide",
+    "viewAll": "Voir Tout"
+  }
+}

@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+:root {
+  --white: #FFFFFF;
+  --black: #0A0A0A;
+  --warm-white: #FAF9F7;
+  --cream: #F5F2EC;
+  --sand: #EDE8DF;
+  --gold: #B89A6A;
+  --gold-light: #C9A86A;
+  --muted: #8A8680;
+  --border: #E8E4DC;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Typography System */
+.f-display {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.f-serif {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.f-editorial {
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.f-label {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.f-body {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 1px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* Selection */
+::selection { background: var(--black); color: var(--white); }
+
+/* Animations — slow, deliberate */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes revealRight {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+@keyframes scaleIn {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
+}
+@keyframes slideLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.anim-fade-up    { animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) forwards; opacity:0; }
+.anim-fade-in    { animation: fadeIn 0.8s ease forwards; opacity:0; }
+.anim-scale-in   { animation: scaleIn 1.4s cubic-bezier(0.16,1,0.3,1) forwards; }
+.anim-reveal     { animation: revealRight 0.9s cubic-bezier(0.77,0,0.18,1) forwards; }
+.anim-marquee    { animation: slideLeft 40s linear infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* Hover image zoom */
+.img-zoom img {
+  transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Luxury link underline */
+.lux-link {
+  position: relative;
+  display: inline-block;
+}
+.lux-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.77,0,0.18,1);
+}
+.lux-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Gold rule */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+/* Mobile safe area */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* Image object fit helpers */
+.img-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #F5F2EC 25%, #EDE8DF 50%, #F5F2EC 75%);
+  background-size: 200%;
+  animation: shimmer 1.8s infinite;
+}

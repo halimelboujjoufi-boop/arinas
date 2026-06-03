@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "ARINAS — Luxury Fashion",
+    "description": "Discover ARINAS, a curated destination for luxury fashion. Shop the finest couture pieces from the world's most prestigious ateliers."
+  },
+  "announcement": [
+    "Free shipping on orders above $500  ·  Free returns within 30 days",
+    "New Arrivals: Summer Collection 2025 — Discover Now",
+    "Complimentary gift wrapping on all orders"
+  ],
+  "nav": {
+    "newArrivals": "New Arrivals",
+    "women": "Women",
+    "dresses": "Dresses",
+    "abayas": "Abayas",
+    "collections": "Collections",
+    "sale": "Sale",
+    "accessories": "Accessories",
+    "contact": "Contact"
+  },
+  "account": {
+    "search": "Search",
+    "account": "Account",
+    "wishlist": "Wishlist",
+    "bag": "Bag",
+    "signIn": "Sign In",
+    "createAccount": "Create Account",
+    "myOrders": "My Orders",
+    "myWishlist": "My Wishlist",
+    "language": "Language"
+  },
+  "shortcuts": {
+    "freeShipping": "Free Shipping",
+    "freeShippingSub": "On orders over $500",
+    "securePayment": "Secure Payment",
+    "securePaymentSub": "Encrypted checkout",
+    "freeReturns": "Free Returns",
+    "freeReturnsSub": "Within 30 days",
+    "authenticity": "Authenticity",
+    "authenticitySub": "Certified genuine"
+  },
+  "footer": {
+    "tagline": "A house built on the premise that true luxury lies in the singular, the rare, and the enduring.",
+    "house": "The House",
+    "clientCare": "Client Care",
+    "circle": "The Circle",
+    "circleText": "Private access to new arrivals and exclusive events.",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "welcome": "Welcome to the Circle.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  },
+  "common": {
+    "discover": "Discover the Collection",
+    "addToBag": "Add to Bag",
+    "quickView": "Quick View",
+    "viewAll": "View All"
+  }
+}

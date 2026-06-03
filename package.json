@@ -1,0 +1,41 @@
+{
+  "name": "arinas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --turbopack",
+    "build:ci": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run lint && npm run typecheck && npm run build:ci",
+    "deploy:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-deployment.ps1"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@stripe/stripe-js": "^9.7.0",
+    "@supabase/supabase-js": "^2.106.2",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.17.0",
+    "next": "16.2.7",
+    "next-intl": "^4.13.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hot-toast": "^2.6.0",
+    "stripe": "^22.2.0",
+    "swiper": "^12.2.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.7",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
