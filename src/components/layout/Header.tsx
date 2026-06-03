@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useStore } from "@/lib/store";
 import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown } from "lucide-react";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import { useT, useDict } from "@/i18n/provider";
 
 type MegaMenu = {
   cols: Array<{ title: string; links: string[] }>;
@@ -14,6 +15,7 @@ type MegaMenu = {
 };
 
 type NavItem = {
+  key: string;
   label: string;
   href: string;
   mega: MegaMenu | null;
@@ -22,9 +24,9 @@ type NavItem = {
 
 
 const NAV: NavItem[] = [
-  { label: "New Arrivals", href: "/new-arrivals", mega: null },
+  { key: "newArrivals", label: "New Arrivals", href: "/new-arrivals", mega: null },
   {
-    label: "Women", href: "/shop",
+    key: "women", label: "Women", href: "/shop",
     mega: {
       cols: [
         { title: "Clothing",    links: ["Dresses", "Abayas", "Tops", "Blazers", "Trousers", "Coats"] },
@@ -38,7 +40,7 @@ const NAV: NavItem[] = [
     },
   },
   {
-    label: "Dresses", href: "/shop",
+    key: "dresses", label: "Dresses", href: "/shop",
     mega: {
       cols: [
         { title: "Style",     links: ["Maxi", "Midi", "Mini", "Evening Gowns", "Wrap"] },
@@ -52,7 +54,7 @@ const NAV: NavItem[] = [
     },
   },
   {
-    label: "Abayas", href: "/shop",
+    key: "abayas", label: "Abayas", href: "/shop",
     mega: {
       cols: [
         { title: "Style",    links: ["Open", "Closed", "Embroidered", "Butterfly", "Wrap"] },
@@ -66,7 +68,7 @@ const NAV: NavItem[] = [
     },
   },
   {
-    label: "Collections", href: "/collections",
+    key: "collections", label: "Collections", href: "/collections",
     mega: {
       cols: [
         { title: "By Season", links: ["Summer 2025", "Pre-Fall", "Resort", "Holiday"] },
@@ -79,9 +81,9 @@ const NAV: NavItem[] = [
       ],
     },
   },
-  { label: "Sale",        href: "/shop",    mega: null, sale: true },
-  { label: "Accessories", href: "/shop",    mega: null },
-  { label: "Contact",     href: "/contact", mega: null },
+  { key: "sale",        label: "Sale",        href: "/shop",    mega: null, sale: true },
+  { key: "accessories", label: "Accessories", href: "/shop",    mega: null },
+  { key: "contact",     label: "Contact",     href: "/contact", mega: null },
 ];
 
 const MSGS = [
@@ -94,6 +96,11 @@ const MSGS = [
 export default function Header() {
   const { state, dispatch } = useStore();
   const pathname = usePathname();
+  const t = useT();
+  const dict = useDict();
+  const messages = Array.isArray(dict.announcement)
+    ? (dict.announcement as string[])
+    : MSGS;
   const [scrolled,     setScrolled]     = useState(false);
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [activeMega,   setActiveMega]   = useState<string | null>(null);
@@ -110,9 +117,10 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const t = setInterval(() => setMsgIdx((i) => (i + 1) % MSGS.length), 4500);
-    return () => clearInterval(t);
-  }, []);
+    const total = messages.length || 1;
+    const id = setInterval(() => setMsgIdx((i) => (i + 1) % total), 4500);
+    return () => clearInterval(id);
+  }, [messages.length]);
 
   const openMega  = (l: string) => { if (megaTimer.current) clearTimeout(megaTimer.current); setActiveMega(l); };
   const closeMega = ()          => { megaTimer.current = setTimeout(() => setActiveMega(null), 160); };
@@ -161,7 +169,7 @@ export default function Header() {
                 animation: "fadeIn 0.5s ease",
               }}
             >
-              {MSGS[msgIdx]}
+              {messages[msgIdx] ?? messages[0]}
             </p>
           </div>
         )}
@@ -239,19 +247,19 @@ export default function Header() {
                   style={{ animation: "fadeIn 0.18s ease" }}
                 >
                   {[
-                    { label: "Sign In",        href: "#" },
-                    { label: "Create Account", href: "#" },
-                    { label: "My Orders",      href: "#" },
-                    { label: "My Wishlist",    href: "/wishlist" },
+                    { key: "signIn",        href: "#" },
+                    { key: "createAccount", href: "#" },
+                    { key: "myOrders",      href: "#" },
+                    { key: "myWishlist",    href: "/wishlist" },
                   ].map((it) => (
                     <Link
-                      key={it.label}
+                      key={it.key}
                       href={it.href}
                       onClick={() => setAccountOpen(false)}
                       className="block px-6 py-3 text-[#2A2A2A]/70 hover:text-[#B89A6A] hover:bg-[#FAF9F7] transition-colors"
                       style={{ fontSize: "12px", fontFamily: "Inter, sans-serif", fontWeight: 300, letterSpacing: "0.06em" }}
                     >
-                      {it.label}
+                      {t(`account.${it.key}`)}
                     </Link>
                   ))}
                 </div>
@@ -323,7 +331,7 @@ export default function Header() {
                     textTransform: "uppercase",
                   }}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`, item.label)}
                   {item.mega && (
                     <ChevronDown
                       size={15}
@@ -448,21 +456,21 @@ export default function Header() {
                     textTransform: "uppercase",
                   }}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`, item.label)}
                 </Link>
               ))}
             </nav>
 
             <div className="mt-10 pt-8 border-t border-white/[0.07] space-y-6">
               <LanguageSwitcher tone="light" variant="list" />
-              {["Sign In", "Create Account", "My Orders"].map((l) => (
+              {["signIn", "createAccount", "myOrders"].map((k) => (
                 <a
-                  key={l}
+                  key={k}
                   href="#"
                   className="block text-white/45 hover:text-white/80 transition-colors"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase" }}
                 >
-                  {l}
+                  {t(`account.${k}`)}
                 </a>
               ))}
             </div>

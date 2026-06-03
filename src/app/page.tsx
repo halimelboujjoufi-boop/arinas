@@ -1,4 +1,7 @@
+import { headers } from "next/headers";
 import { Truck, ShieldCheck, RefreshCcw, BadgeCheck } from "lucide-react";
+import { getDictionary } from "@/i18n/dictionaries";
+import { defaultLocale, isLocale } from "@/i18n/config";
 import HeroSection from "@/components/home/HeroSection";
 import BrandsSection from "@/components/home/BrandsSection";
 import NewArrivals from "@/components/home/NewArrivals";
@@ -12,7 +15,13 @@ import PromoBanner from "@/components/home/PromoBanner";
 import InstagramGallery from "@/components/home/InstagramGallery";
 import ReviewsSection from "@/components/home/ReviewsSection";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const h = await headers();
+  const headerLocale = h.get("x-locale");
+  const locale = isLocale(headerLocale) ? headerLocale : defaultLocale;
+  const dict = await getDictionary(locale);
+  const s = dict.shortcuts;
+
   return (
     <>
       <HeroSection />
@@ -22,10 +31,10 @@ export default function HomePage() {
         <div className="max-w-[1680px] mx-auto px-6 lg:px-14 py-16 lg:py-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 sm:gap-x-12 lg:gap-16">
             {[
-              { Icon: Truck,       title: "Free Shipping",  sub: "On orders over $500" },
-              { Icon: ShieldCheck, title: "Secure Payment", sub: "Encrypted checkout" },
-              { Icon: RefreshCcw,  title: "Free Returns",   sub: "Within 30 days" },
-              { Icon: BadgeCheck,  title: "Authenticity",   sub: "Certified genuine" },
+              { Icon: Truck,       title: s.freeShipping,  sub: s.freeShippingSub },
+              { Icon: ShieldCheck, title: s.securePayment, sub: s.securePaymentSub },
+              { Icon: RefreshCcw,  title: s.freeReturns,   sub: s.freeReturnsSub },
+              { Icon: BadgeCheck,  title: s.authenticity,  sub: s.authenticitySub },
             ].map(({ Icon, title, sub }) => (
               <div
                 key={title}

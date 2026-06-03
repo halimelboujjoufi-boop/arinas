@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useT } from "@/i18n/provider";
 
 export default function Footer() {
+  const t = useT();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,7 +33,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="f-body mt-6 max-w-xs" style={{ color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>
-              A house built on the premise that true luxury lies in the singular, the rare, and the enduring.
+              {t("footer.tagline")}
             </p>
 
             {/* Social ? minimal text */}
@@ -53,7 +55,7 @@ export default function Footer() {
           <div className="lg:col-span-4 grid grid-cols-2 gap-10">
             <div>
               <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                The House
+                {t("footer.house")}
               </p>
               <ul className="space-y-4">
                 {["New Arrivals", "Collections", "The Edit", "Lookbook", "Atelier"].map((item) => (
@@ -71,7 +73,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                Client Care
+                {t("footer.clientCare")}
               </p>
               <ul className="space-y-4">
                 {["Size Guide", "Shipping", "Returns", "Authenticity", "Contact"].map((item) => (
@@ -92,14 +94,14 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="lg:col-span-3">
             <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              The Circle
+              {t("footer.circle")}
             </p>
             <p className="f-body mb-6" style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>
-              Private access to new arrivals and exclusive events.
+              {t("footer.circleText")}
             </p>
             {submitted ? (
               <p className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>
-                Welcome to the Circle.
+                {t("footer.welcome")}
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-3">
@@ -107,7 +109,7 @@ export default function Footer() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
+                  placeholder={t("footer.emailPlaceholder")}
                   required
                   className="w-full bg-transparent border-b border-white/20 py-2.5 text-white placeholder-white/25 focus:outline-none focus:border-white/50 transition-colors f-label"
                   style={{ fontSize: "11px", letterSpacing: "0.08em" }}
@@ -117,7 +119,7 @@ export default function Footer() {
                   className="f-label text-[#B89A6A] hover:text-white transition-colors"
                   style={{ fontSize: "9px", letterSpacing: "0.25em" }}
                 >
-                  Subscribe
+                  {t("footer.subscribe")}
                 </button>
               </form>
             )}
@@ -132,14 +134,14 @@ export default function Footer() {
             2025 ARINAS - 12 Rue de la Paix, Paris
           </p>
           <div className="flex gap-6">
-            {["Privacy", "Terms", "Cookies"].map((item) => (
+            {["privacy", "terms", "cookies"].map((k) => (
               <a
-                key={item}
+                key={k}
                 href="#"
                 className="f-label text-white/25 hover:text-white/60 transition-colors"
                 style={{ fontSize: "9px", letterSpacing: "0.15em" }}
               >
-                {item}
+                {t(`footer.${k}`)}
               </a>
             ))}
           </div>
