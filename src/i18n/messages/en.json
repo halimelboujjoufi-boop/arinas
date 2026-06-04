@@ -109,5 +109,58 @@
     "saved": "Saved",
     "title": "My Wishlist",
     "empty": "Your wishlist is empty"
+  },
+  "cartHeaders": {
+    "product": "Product",
+    "price": "Price",
+    "qty": "Qty",
+    "total": "Total",
+    "size": "Size",
+    "item": "item",
+    "items": "items"
+  },
+  "newArrivals": {
+    "eyebrow": "Just Arrived",
+    "title": "New Season",
+    "subtitle": "The season's most coveted pieces"
+  },
+  "contact": {
+    "eyebrow": "Reach Out",
+    "title": "Contact",
+    "subtitle": "Our style advisors are available to assist with any enquiry",
+    "findUs": "Find Us",
+    "visit": "Visit",
+    "call": "Call",
+    "email": "Email",
+    "hours": "Hours",
+    "privateShopping": "Private Shopping",
+    "bookTitle": "Book a Private Appointment",
+    "bookDesc": "A dedicated style advisor, an unhurried afternoon, and the full collection at your disposal.",
+    "bookNow": "Book Now",
+    "name": "Name",
+    "emailLabel": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "namePh": "Your name",
+    "subjectPh": "How can we help?",
+    "messagePh": "Your message…",
+    "send": "Send Message",
+    "sent": "Sent",
+    "thankYou": "Thank You",
+    "sentDesc": "We will respond within 24 hours."
+  },
+  "product": {
+    "colour": "Colour",
+    "select": "Select",
+    "size": "Size",
+    "sizeGuide": "Size Guide",
+    "selectSize": "Please select a size",
+    "added": "Added to Bag",
+    "details": "Composition & Details",
+    "care": "Care",
+    "delivery": "Delivery & Returns",
+    "completeLook": "Complete the Look",
+    "youMayLove": "You May Also Love",
+    "newArrival": "New Arrival"
   }
 }

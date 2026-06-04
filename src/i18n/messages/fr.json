@@ -109,5 +109,58 @@
     "saved": "Enregistré",
     "title": "Mes Favoris",
     "empty": "Votre liste de favoris est vide"
+  },
+  "cartHeaders": {
+    "product": "Produit",
+    "price": "Prix",
+    "qty": "Qté",
+    "total": "Total",
+    "size": "Taille",
+    "item": "article",
+    "items": "articles"
+  },
+  "newArrivals": {
+    "eyebrow": "Vient d'arriver",
+    "title": "Nouvelle Saison",
+    "subtitle": "Les pièces les plus convoitées de la saison"
+  },
+  "contact": {
+    "eyebrow": "Contactez-nous",
+    "title": "Contact",
+    "subtitle": "Nos conseillers de style sont à votre disposition pour toute demande",
+    "findUs": "Nous trouver",
+    "visit": "Visiter",
+    "call": "Appeler",
+    "email": "E-mail",
+    "hours": "Horaires",
+    "privateShopping": "Shopping privé",
+    "bookTitle": "Réserver un rendez-vous privé",
+    "bookDesc": "Un conseiller de style dédié, un après-midi sans hâte et toute la collection à votre disposition.",
+    "bookNow": "Réserver",
+    "name": "Nom",
+    "emailLabel": "E-mail",
+    "subject": "Sujet",
+    "message": "Message",
+    "namePh": "Votre nom",
+    "subjectPh": "Comment pouvons-nous vous aider ?",
+    "messagePh": "Votre message…",
+    "send": "Envoyer le message",
+    "sent": "Envoyé",
+    "thankYou": "Merci",
+    "sentDesc": "Nous vous répondrons sous 24 heures."
+  },
+  "product": {
+    "colour": "Couleur",
+    "select": "Choisir",
+    "size": "Taille",
+    "sizeGuide": "Guide des tailles",
+    "selectSize": "Veuillez choisir une taille",
+    "added": "Ajouté au panier",
+    "details": "Composition & Détails",
+    "care": "Entretien",
+    "delivery": "Livraison & Retours",
+    "completeLook": "Compléter le look",
+    "youMayLove": "Vous aimerez aussi",
+    "newArrival": "Nouveauté"
   }
 }
