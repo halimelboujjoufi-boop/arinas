@@ -5,8 +5,10 @@ import Image from "next/image";
 import { collections } from "@/lib/data";
 import { useState } from "react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useT } from "@/i18n/provider";
 
 export default function CollectionsSection() {
+  const t = useT();
   const [active, setActive] = useState<string | null>(null);
 
   return (
@@ -15,12 +17,12 @@ export default function CollectionsSection() {
         <div className="mb-20">
           <ScrollReveal delay={0}>
             <p className="f-label text-[#B89A6A] mb-5" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              The House
+              {t("home.theHouse")}
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h2 className="f-display text-white" style={{ fontSize: "clamp(48px,6vw,88px)" }}>
-              Collections
+              {t("home.collections")}
             </h2>
           </ScrollReveal>
         </div>

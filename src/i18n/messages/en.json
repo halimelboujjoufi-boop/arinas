@@ -57,5 +57,57 @@
     "addToBag": "Add to Bag",
     "quickView": "Quick View",
     "viewAll": "View All"
+  },
+  "home": {
+    "justArrived": "Just Arrived",
+    "newSeason": "New Season",
+    "houseFavourites": "House Favourites",
+    "theEdit": "The Edit",
+    "carefullyConsidered": "Carefully Considered",
+    "theSelection": "The Selection",
+    "selectionBody": "Pieces chosen not for trend, but for permanence — each one an investment in the enduring.",
+    "viewFullCollection": "View the Full Collection",
+    "nowShowing": "Now Showing",
+    "theAtelier": "The Atelier",
+    "theHouse": "The House",
+    "collections": "Collections",
+    "voices": "Voices",
+    "clientStories": "Client Stories",
+    "theJournal": "The Journal",
+    "followInstagram": "Follow on Instagram",
+    "promoSeason": "Autumn — Winter 2025",
+    "promoTitle": "The New Season"
+  },
+  "shop": {
+    "allPieces": "All Pieces",
+    "title": "The Collection",
+    "sort": "Sort",
+    "featured": "Featured",
+    "newest": "Newest",
+    "priceAsc": "Price ↑",
+    "priceDesc": "Price ↓",
+    "piece": "piece",
+    "pieces": "pieces",
+    "noResults": "No pieces found in this category."
+  },
+  "cart": {
+    "review": "Review",
+    "title": "Your Bag",
+    "empty": "Your bag is empty",
+    "summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "continue": "Continue Shopping",
+    "promo": "Promo code",
+    "apply": "Apply"
+  },
+  "wishlist": {
+    "saved": "Saved",
+    "title": "My Wishlist",
+    "empty": "Your wishlist is empty"
   }
 }

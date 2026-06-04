@@ -57,5 +57,57 @@
     "addToBag": "Ajouter au panier",
     "quickView": "Aperçu rapide",
     "viewAll": "Tout voir"
+  },
+  "home": {
+    "justArrived": "Vient d'arriver",
+    "newSeason": "Nouvelle Saison",
+    "houseFavourites": "Favoris de la Maison",
+    "theEdit": "La Sélection",
+    "carefullyConsidered": "Choisi avec soin",
+    "theSelection": "La Sélection",
+    "selectionBody": "Des pièces choisies non pour la tendance, mais pour la permanence — chacune un investissement durable.",
+    "viewFullCollection": "Voir toute la collection",
+    "nowShowing": "À l'affiche",
+    "theAtelier": "L'Atelier",
+    "theHouse": "La Maison",
+    "collections": "Collections",
+    "voices": "Témoignages",
+    "clientStories": "Histoires de clientes",
+    "theJournal": "Le Journal",
+    "followInstagram": "Suivre sur Instagram",
+    "promoSeason": "Automne — Hiver 2025",
+    "promoTitle": "La Nouvelle Saison"
+  },
+  "shop": {
+    "allPieces": "Toutes les pièces",
+    "title": "La Collection",
+    "sort": "Trier",
+    "featured": "En vedette",
+    "newest": "Nouveautés",
+    "priceAsc": "Prix ↑",
+    "priceDesc": "Prix ↓",
+    "piece": "pièce",
+    "pieces": "pièces",
+    "noResults": "Aucune pièce trouvée dans cette catégorie."
+  },
+  "cart": {
+    "review": "Récapitulatif",
+    "title": "Votre Panier",
+    "empty": "Votre panier est vide",
+    "summary": "Récapitulatif de commande",
+    "subtotal": "Sous-total",
+    "discount": "Remise",
+    "shipping": "Livraison",
+    "free": "Offerte",
+    "total": "Total",
+    "checkout": "Passer la commande",
+    "continue": "Continuer mes achats",
+    "promo": "Code promo",
+    "apply": "Appliquer"
+  },
+  "wishlist": {
+    "saved": "Enregistré",
+    "title": "Mes Favoris",
+    "empty": "Votre liste de favoris est vide"
   }
 }

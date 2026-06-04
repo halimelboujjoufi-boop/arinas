@@ -57,5 +57,57 @@
     "addToBag": "أضيفي إلى الحقيبة",
     "quickView": "عرض سريع",
     "viewAll": "عرض الكل"
+  },
+  "home": {
+    "justArrived": "وصل حديثاً",
+    "newSeason": "موسم جديد",
+    "houseFavourites": "المفضلة لدى الدار",
+    "theEdit": "المختارات",
+    "carefullyConsidered": "مختارة بعناية",
+    "theSelection": "التشكيلة المختارة",
+    "selectionBody": "قطع اختيرت لا لأجل الموضة، بل لأجل الخلود — كل قطعة استثمار يدوم.",
+    "viewFullCollection": "عرض التشكيلة كاملة",
+    "nowShowing": "المعروض الآن",
+    "theAtelier": "الأتيليه",
+    "theHouse": "الدار",
+    "collections": "التشكيلات",
+    "voices": "آراء",
+    "clientStories": "قصص عميلاتنا",
+    "theJournal": "اليوميات",
+    "followInstagram": "تابعينا على إنستغرام",
+    "promoSeason": "خريف — شتاء 2025",
+    "promoTitle": "الموسم الجديد"
+  },
+  "shop": {
+    "allPieces": "جميع القطع",
+    "title": "التشكيلة",
+    "sort": "ترتيب",
+    "featured": "مميّز",
+    "newest": "الأحدث",
+    "priceAsc": "السعر ↑",
+    "priceDesc": "السعر ↓",
+    "piece": "قطعة",
+    "pieces": "قطع",
+    "noResults": "لا توجد قطع في هذه الفئة."
+  },
+  "cart": {
+    "review": "مراجعة",
+    "title": "حقيبتك",
+    "empty": "حقيبتك فارغة",
+    "summary": "ملخّص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "discount": "خصم",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "total": "الإجمالي",
+    "checkout": "إتمام الطلب",
+    "continue": "متابعة التسوق",
+    "promo": "رمز الخصم",
+    "apply": "تطبيق"
+  },
+  "wishlist": {
+    "saved": "محفوظ",
+    "title": "مفضّلتي",
+    "empty": "قائمة مفضّلتك فارغة"
   }
 }

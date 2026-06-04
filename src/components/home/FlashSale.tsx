@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/ui/ProductCard";
+import { useT } from "@/i18n/provider";
 
 // Renamed as a curated "The Selection" editorial section — no countdown timers
 export default function FlashSale() {
+  const t = useT();
   const featured = products.filter((p) => p.originalPrice || p.isBestSeller).slice(0, 4);
 
   return (
@@ -15,16 +17,15 @@ export default function FlashSale() {
         <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
           <div>
             <p className="f-label text-[#B89A6A] mb-5" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              Carefully Considered
+              {t("home.carefullyConsidered")}
             </p>
             <h2 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(42px,5vw,72px)" }}>
-              The Selection
+              {t("home.theSelection")}
             </h2>
           </div>
           <div className="lg:text-right">
             <p className="f-body max-w-sm lg:ml-auto" style={{ fontSize: "13px" }}>
-              Pieces chosen not for trend, but for permanence —
-              each one an investment in the enduring.
+              {t("home.selectionBody")}
             </p>
           </div>
         </div>
@@ -42,7 +43,7 @@ export default function FlashSale() {
             style={{ fontSize: "10px", letterSpacing: "0.25em" }}
           >
             <span className="w-8 h-px bg-current" />
-            View the Full Collection
+            {t("home.viewFullCollection")}
             <span className="w-8 h-px bg-current" />
           </Link>
         </div>

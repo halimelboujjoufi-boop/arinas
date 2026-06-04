@@ -2,8 +2,10 @@
 
 import { instagramPosts } from "@/lib/data";
 import Image from "next/image";
+import { useT } from "@/i18n/provider";
 
 export default function InstagramGallery() {
+  const t = useT();
   return (
     <section className="py-28 lg:py-36 bg-[#FAF9F7]">
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14">
@@ -11,7 +13,7 @@ export default function InstagramGallery() {
         <div className="mb-16 grid lg:grid-cols-2 items-end gap-8">
           <div>
             <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              The Journal
+              {t("home.theJournal")}
             </p>
             <h2 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(42px,5vw,72px)" }}>
               @ARINAS
@@ -51,7 +53,7 @@ export default function InstagramGallery() {
             className="f-label text-[#8A8680] hover:text-[#0A0A0A] transition-colors"
             style={{ fontSize: "9px", letterSpacing: "0.3em" }}
           >
-            Follow on Instagram
+            {t("home.followInstagram")}
           </a>
           <div className="h-px flex-1 bg-[#0A0A0A]/10" />
         </div>
