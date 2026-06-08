@@ -47,3 +47,17 @@ next-env.d.ts
 .startlog*
 .admintest.mjs
 .slog*
+
+# Capacitor / Android
+android/.gradle/
+android/app/build/
+android/build/
+android/captures/
+android/local.properties
+android/app/release/
+android/app/google-services.json
+keystore.properties
+*.keystore
+*.jks
+android/app/*.aab
+android/app/*.apk

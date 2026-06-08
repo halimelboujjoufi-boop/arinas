@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ARINAS</string>
+    <string name="title_activity_main">ARINAS</string>
+    <string name="package_name">ma.arinas.app</string>
+    <string name="custom_url_scheme">ma.arinas.app</string>
+</resources>
