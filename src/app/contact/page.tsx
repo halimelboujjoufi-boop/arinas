@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react";
+import { useT } from "@/i18n/provider";
 
 export default function ContactPage() {
+  const t = useT();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -19,13 +21,13 @@ export default function ContactPage() {
       {/* Page header */}
       <div className="bg-[#F5F2EC] py-16 lg:py-24 text-center">
         <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.35em" }}>
-          Reach Out
+          {t("contact.eyebrow")}
         </p>
         <h1 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(38px, 5vw, 72px)" }}>
-          Contact
+          {t("contact.title")}
         </h1>
         <p className="f-body text-[#8A8680] mt-5 max-w-md mx-auto" style={{ fontSize: "13px" }}>
-          Our style advisors are available to assist with any enquiry
+          {t("contact.subtitle")}
         </p>
       </div>
 
@@ -36,14 +38,14 @@ export default function ContactPage() {
           <div className="lg:col-span-2 space-y-10">
             <div>
               <p className="f-label text-[#B89A6A] mb-8" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                Find Us
+                {t("contact.findUs")}
               </p>
               <div className="space-y-8">
                 {[
-                  { Icon: MapPin,  title: "Visit",   lines: ["12 Rue de la Paix", "Paris, 75002, France"] },
-                  { Icon: Phone,   title: "Call",    lines: ["+33 1 23 45 67 89", "Mon-Sat, 9am-7pm CET"] },
-                  { Icon: Mail,    title: "Email",   lines: ["contact@arinas.com", "Reply within 24 hours"] },
-                  { Icon: Clock,   title: "Hours",   lines: ["Mon-Sat: 10am-8pm", "Sunday: 12pm-6pm"] },
+                  { Icon: MapPin,  title: t("contact.visit"), lines: ["12 Rue de la Paix", "Paris, 75002, France"] },
+                  { Icon: Phone,   title: t("contact.call"),  lines: ["+33 1 23 45 67 89", "Mon-Sat, 9am-7pm CET"] },
+                  { Icon: Mail,    title: t("contact.email"), lines: ["contact@arinas.com", "Reply within 24 hours"] },
+                  { Icon: Clock,   title: t("contact.hours"), lines: ["Mon-Sat: 10am-8pm", "Sunday: 12pm-6pm"] },
                 ].map(({ Icon, title, lines }) => (
                   <div key={title} className="flex gap-5">
                     <div className="w-9 h-9 border border-[#0A0A0A]/10 flex items-center justify-center flex-shrink-0">
@@ -65,19 +67,19 @@ export default function ContactPage() {
             {/* Private appointment card */}
             <div className="bg-[#0A0A0A] p-8">
               <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                Private Shopping
+                {t("contact.privateShopping")}
               </p>
               <h3 className="f-display text-white mb-4" style={{ fontSize: "clamp(22px, 2vw, 30px)" }}>
-                Book a Private<br />Appointment
+                {t("contact.bookTitle")}
               </h3>
               <p className="f-body mb-7" style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", lineHeight: 1.8 }}>
-                A dedicated style advisor, an unhurried afternoon, and the full collection at your disposal.
+                {t("contact.bookDesc")}
               </p>
               <button
                 className="f-label text-[#B89A6A] border border-[#B89A6A] px-6 py-3 hover:bg-[#B89A6A] hover:text-white transition-colors"
                 style={{ fontSize: "9px", letterSpacing: "0.25em" }}
               >
-                Book Now
+                {t("contact.bookNow")}
               </button>
             </div>
           </div>
@@ -90,31 +92,31 @@ export default function ContactPage() {
                   <ArrowRight size={20} strokeWidth={1} className="text-[#B89A6A]" />
                 </div>
                 <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                  Sent
+                  {t("contact.sent")}
                 </p>
                 <h3 className="f-display text-[#0A0A0A] mb-4" style={{ fontSize: "clamp(28px, 3vw, 42px)" }}>
-                  Thank You
+                  {t("contact.thankYou")}
                 </h3>
                 <p className="f-body text-[#8A8680]" style={{ fontSize: "13px" }}>
-                  We will respond within 24 hours.
+                  {t("contact.sentDesc")}
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-10">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
-                    <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>Name</label>
+                    <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>{t("contact.name")}</label>
                     <input
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="Your name"
+                      placeholder={t("contact.namePh")}
                       required
                       className={inputBase}
                       style={{ fontSize: "14px" }}
                     />
                   </div>
                   <div>
-                    <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>Email</label>
+                    <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>{t("contact.emailLabel")}</label>
                     <input
                       type="email"
                       value={form.email}
@@ -128,22 +130,22 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>Subject</label>
+                  <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>{t("contact.subject")}</label>
                   <input
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                    placeholder="How can we help?"
+                    placeholder={t("contact.subjectPh")}
                     className={inputBase}
                     style={{ fontSize: "14px" }}
                   />
                 </div>
 
                 <div>
-                  <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>Message</label>
+                  <label className="f-label text-[#0A0A0A] block mb-3" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>{t("contact.message")}</label>
                   <textarea
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Your message&"
+                    placeholder={t("contact.messagePh")}
                     rows={6}
                     required
                     className={`${inputBase} resize-none`}
@@ -156,7 +158,7 @@ export default function ContactPage() {
                   className="flex items-center gap-3 f-label text-white bg-[#0A0A0A] px-8 py-4 hover:bg-[#B89A6A] transition-colors"
                   style={{ fontSize: "9px", letterSpacing: "0.28em" }}
                 >
-                  Send Message
+                  {t("contact.send")}
                   <ArrowRight size={12} strokeWidth={1.5} />
                 </button>
               </form>

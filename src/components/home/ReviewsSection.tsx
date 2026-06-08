@@ -4,8 +4,10 @@ import { useState } from "react";
 import { reviews } from "@/lib/data";
 import Image from "next/image";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useT } from "@/i18n/provider";
 
 export default function ReviewsSection() {
+  const t = useT();
   const [active, setActive] = useState(0);
   const review = reviews[active];
 
@@ -15,12 +17,12 @@ export default function ReviewsSection() {
         <div className="mb-20">
           <ScrollReveal delay={0}>
             <p className="f-label text-[#B89A6A] mb-5" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              Voices
+              {t("home.voices")}
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h2 className="f-display text-white" style={{ fontSize: "clamp(42px,5vw,72px)" }}>
-              Client Stories
+              {t("home.clientStories")}
             </h2>
           </ScrollReveal>
         </div>

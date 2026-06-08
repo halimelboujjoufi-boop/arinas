@@ -4,8 +4,10 @@ import { useState, useMemo } from "react";
 import { products, categories } from "@/lib/data";
 import ProductCard from "@/components/ui/ProductCard";
 import { ChevronDown } from "lucide-react";
+import { useT } from "@/i18n/provider";
 
 export default function ShopPage() {
+  const t = useT();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
 
@@ -27,10 +29,10 @@ export default function ShopPage() {
       {/* Header */}
       <div className="py-28 lg:py-36 px-6 lg:px-14 max-w-[1680px] mx-auto">
         <p className="f-label text-[#B89A6A] mb-5" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-          All Pieces
+          {t("shop.allPieces")}
         </p>
         <h1 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(52px,7vw,100px)" }}>
-          The Collection
+          {t("shop.title")}
         </h1>
       </div>
 
@@ -63,7 +65,7 @@ export default function ShopPage() {
           {/* Sort */}
           <div className="flex items-center gap-2 flex-shrink-0 justify-end">
             <p className="f-label text-[#8A8680] hidden lg:block" style={{ fontSize: "9px", letterSpacing: "0.15em" }}>
-              Sort
+              {t("shop.sort")}
             </p>
             <div className="relative">
               <select
@@ -72,10 +74,10 @@ export default function ShopPage() {
                 className="appearance-none f-label text-[#0A0A0A] bg-transparent pr-6 pl-0 focus:outline-none cursor-pointer"
                 style={{ fontSize: "9px", letterSpacing: "0.15em" }}
               >
-                <option value="featured">Featured</option>
-                <option value="newest">Newest</option>
-                <option value="price-asc">Price low to high</option>
-                <option value="price-desc">Price high to low</option>
+                <option value="featured">{t("shop.featured")}</option>
+                <option value="newest">{t("shop.newest")}</option>
+                <option value="price-asc">{t("shop.priceAsc")}</option>
+                <option value="price-desc">{t("shop.priceDesc")}</option>
               </select>
               <ChevronDown size={10} className="absolute right-0 top-1/2 -translate-y-1/2 text-[#8A8680] pointer-events-none" />
             </div>
@@ -84,8 +86,8 @@ export default function ShopPage() {
 
         {/* Count */}
         <p className="f-label text-[#8A8680] mb-10" style={{ fontSize: "9px", letterSpacing: "0.15em" }}>
-          {filtered.length} piece{filtered.length !== 1 ? "s" : ""}
-          {selectedCategory !== "All" ? ` - ${selectedCategory}` : ""}
+          {filtered.length} {filtered.length !== 1 ? t("shop.pieces") : t("shop.piece")}
+          {selectedCategory !== "All" ? ` — ${selectedCategory}` : ""}
         </p>
 
         {/* Grid */}

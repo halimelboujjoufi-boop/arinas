@@ -8,6 +8,7 @@ import { Heart, ChevronDown, X, ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ui/ProductCard";
 import Link from "next/link";
 import Image from "next/image";
+import { useT } from "@/i18n/provider";
 
 const sizeGuideData = {
   headers: ["Size", "UK", "EU", "Bust", "Waist", "Hip"],
@@ -25,6 +26,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const product = products.find((p) => p.id === id);
   if (!product) notFound();
 
+  const t = useT();
   const { state, dispatch } = useStore();
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -60,7 +62,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const accordions = [
     {
       key: "details",
-      label: "Composition & Details",
+      label: t("product.details"),
       content: (
         <div className="space-y-3 f-body" style={{ fontSize: "12px", lineHeight: 1.9 }}>
           <p>{product.description || "A studied composition of form and restraint. Each element selected for how it speaks to the whole - never competing, always completing."}</p>
@@ -75,7 +77,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     },
     {
       key: "care",
-      label: "Care",
+      label: t("product.care"),
       content: (
         <ul className="f-body space-y-2" style={{ fontSize: "12px" }}>
           {["Dry clean only", "Do not bleach", "Cool iron if necessary", "Store in provided garment bag"].map((t) => (
@@ -89,7 +91,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     },
     {
       key: "delivery",
-      label: "Delivery & Returns",
+      label: t("product.delivery"),
       content: (
         <div className="f-body space-y-2" style={{ fontSize: "12px" }}>
           <p>Complimentary shipping on all orders over $500. Express delivery within 2-3 business days.</p>
@@ -139,7 +141,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               )}
               {product.isNew && !discount && (
                 <span className="absolute top-5 left-5 f-label text-[#0A0A0A] bg-white px-3 py-1.5" style={{ fontSize: "9px" }}>
-                  New Arrival
+                  {t("product.newArrival")}
                 </span>
               )}
             </div>
@@ -199,7 +201,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             {product.colors && (
               <div className="mb-7">
                 <p className="f-label text-[#0A0A0A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>
-                  Colour: <span className="text-[#8A8680]" style={{ textTransform: "none", letterSpacing: 0 }}>{selectedColor || "Select"}</span>
+                  {t("product.colour")}: <span className="text-[#8A8680]" style={{ textTransform: "none", letterSpacing: 0 }}>{selectedColor || t("product.select")}</span>
                 </p>
                 <div className="flex gap-3">
                   {product.colors.map((color) => (
@@ -223,14 +225,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-4">
                   <p className="f-label text-[#0A0A0A]" style={{ fontSize: "9px", letterSpacing: "0.25em" }}>
-                    Size
+                    {t("product.size")}
                   </p>
                   <button
                     onClick={() => setSizeGuideOpen(true)}
                     className="f-label text-[#8A8680] hover:text-[#B89A6A] transition-colors"
                     style={{ fontSize: "9px", letterSpacing: "0.15em" }}
                   >
-                    Size Guide
+                    {t("product.sizeGuide")}
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -251,7 +253,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
                 {product.sizes && !selectedSize && (
                   <p className="f-label text-[#8A8680] mt-2" style={{ fontSize: "9px" }}>
-                    Please select a size
+                    {t("product.selectSize")}
                   </p>
                 )}
               </div>
@@ -271,7 +273,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 }`}
                 style={{ fontSize: "11px", letterSpacing: "0.28em" }}
               >
-                {added ? "Added to Bag" : "Add to Bag"}
+                {added ? t("product.added") : t("common.addToBag")}
               </button>
               <button
                 onClick={() => dispatch({ type: "TOGGLE_WISHLIST", payload: product })}
@@ -322,10 +324,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             <div className="flex items-end justify-between mb-16">
               <div>
                 <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                  Complete the Look
+                  {t("product.completeLook")}
                 </p>
                 <h2 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(32px,4vw,56px)" }}>
-                  You May Also Love
+                  {t("product.youMayLove")}
                 </h2>
               </div>
               <Link
@@ -358,7 +360,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           }`}
           style={{ fontSize: "9px", letterSpacing: "0.25em" }}
         >
-          {added ? "Added" : "Add to Bag"}
+          {added ? t("product.added") : t("common.addToBag")}
         </button>
       </div>
 
@@ -369,7 +371,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           <div className="relative bg-white w-full max-w-xl max-h-[80vh] overflow-auto z-10">
             <div className="flex items-center justify-between px-8 py-6 border-b border-[#0A0A0A]/[0.08]">
               <p className="f-label text-[#0A0A0A]" style={{ fontSize: "10px", letterSpacing: "0.25em" }}>
-                Size Guide
+                {t("product.sizeGuide")}
               </p>
               <button onClick={() => setSizeGuideOpen(false)} className="text-[#8A8680] hover:text-[#0A0A0A] transition-colors">
                 <X size={18} strokeWidth={1.5} />

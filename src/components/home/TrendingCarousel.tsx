@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { products } from "@/lib/data";
 import ProductCard from "@/components/ui/ProductCard";
 import { ArrowRight } from "lucide-react";
+import { useT } from "@/i18n/provider";
 
 export default function TrendingCarousel() {
+  const t = useT();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -30,10 +32,10 @@ export default function TrendingCarousel() {
         <div className="px-6 lg:px-14 flex items-end justify-between mb-16">
           <div>
             <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              Now Showing
+              {t("home.nowShowing")}
             </p>
             <h2 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(42px,5vw,72px)" }}>
-              The Atelier
+              {t("home.theAtelier")}
             </h2>
           </div>
           <div className="hidden lg:flex items-center gap-3">

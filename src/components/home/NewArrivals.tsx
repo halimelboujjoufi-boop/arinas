@@ -8,8 +8,10 @@ import { useStore } from "@/lib/store";
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { useT } from "@/i18n/provider";
 
 export default function NewArrivals() {
+  const t = useT();
   const arrivals = products.filter((p) => p.isNew).slice(0, 5);
   const [hero, ...rest] = arrivals;
 
@@ -20,7 +22,7 @@ export default function NewArrivals() {
         <div>
           <ScrollReveal delay={0}>
             <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-              Just Arrived
+              {t("home.justArrived")}
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100}>
@@ -28,7 +30,7 @@ export default function NewArrivals() {
               className="f-display text-[#0A0A0A]"
               style={{ fontSize: "clamp(42px,5vw,72px)" }}
             >
-              New Season
+              {t("home.newSeason")}
             </h2>
           </ScrollReveal>
         </div>
@@ -38,7 +40,7 @@ export default function NewArrivals() {
             className="hidden lg:flex items-center gap-2 f-label text-[#8A8680] hover:text-[#0A0A0A] transition-colors"
             style={{ fontSize: "10px" }}
           >
-            View All <ArrowUpRight size={13} strokeWidth={1.5} />
+            {t("common.viewAll")} <ArrowUpRight size={13} strokeWidth={1.5} />
           </Link>
         </ScrollReveal>
       </div>

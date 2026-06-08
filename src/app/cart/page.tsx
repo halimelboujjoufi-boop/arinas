@@ -4,8 +4,10 @@ import { useStore, useCartTotal } from "@/lib/store";
 import Link from "next/link";
 import Image from "next/image";
 import { Minus, Plus, X, ShoppingBag, ArrowRight } from "lucide-react";
+import { useT } from "@/i18n/provider";
 
 export default function CartPage() {
+  const t = useT();
   const { state, dispatch } = useStore();
   const subtotal = useCartTotal(state.cart);
   const shipping = subtotal > 500 ? 0 : 35;
@@ -19,14 +21,14 @@ export default function CartPage() {
       {/* Page header */}
       <div className="bg-[#F5F2EC] py-16 lg:py-24 text-center">
         <p className="f-label text-[#B89A6A] mb-4" style={{ fontSize: "9px", letterSpacing: "0.35em" }}>
-          Review
+          {t("cart.review")}
         </p>
         <h1 className="f-display text-[#0A0A0A]" style={{ fontSize: "clamp(38px, 5vw, 72px)" }}>
-          Your Bag
+          {t("cart.title")}
         </h1>
         {state.cart.length > 0 && (
           <p className="f-label text-[#8A8680] mt-3" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
-            {state.cart.reduce((s, i) => s + i.quantity, 0)} item{state.cart.reduce((s, i) => s + i.quantity, 0) !== 1 ? "s" : ""}
+            {state.cart.reduce((s, i) => s + i.quantity, 0)} {state.cart.reduce((s, i) => s + i.quantity, 0) !== 1 ? t("cartHeaders.items") : t("cartHeaders.item")}
           </p>
         )}
       </div>
@@ -36,14 +38,14 @@ export default function CartPage() {
           <div className="text-center py-24">
             <ShoppingBag size={40} strokeWidth={1} className="mx-auto text-[#D4D0CA] mb-6" />
             <p className="f-editorial text-[#8A8680] mb-8" style={{ fontSize: "18px" }}>
-              Your bag is empty
+              {t("cart.empty")}
             </p>
             <Link
               href="/shop"
               className="inline-flex items-center gap-3 f-label text-[#0A0A0A] border border-[#0A0A0A] px-8 py-4 hover:bg-[#0A0A0A] hover:text-white transition-colors"
               style={{ fontSize: "9px", letterSpacing: "0.28em" }}
             >
-              Discover the Collection
+              {t("common.discover")}
               <ArrowRight size={12} strokeWidth={1.5} />
             </Link>
           </div>
@@ -55,16 +57,16 @@ export default function CartPage() {
               {/* Column headers ? desktop only */}
               <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-[#0A0A0A]/[0.08] mb-2">
                 <div className="col-span-6">
-                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>Product</p>
+                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>{t("cartHeaders.product")}</p>
                 </div>
                 <div className="col-span-2 text-center">
-                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>Price</p>
+                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>{t("cartHeaders.price")}</p>
                 </div>
                 <div className="col-span-2 text-center">
-                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>Qty</p>
+                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>{t("cartHeaders.qty")}</p>
                 </div>
                 <div className="col-span-2 text-right">
-                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>Total</p>
+                  <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>{t("cartHeaders.total")}</p>
                 </div>
               </div>
 
@@ -91,7 +93,7 @@ export default function CartPage() {
                           </Link>
                           {item.selectedSize && (
                             <p className="f-label text-[#8A8680] mt-1" style={{ fontSize: "9px", letterSpacing: "0.12em" }}>
-                              Size: {item.selectedSize}
+                              {t("cartHeaders.size")}: {item.selectedSize}
                             </p>
                           )}
                         </div>
@@ -152,7 +154,7 @@ export default function CartPage() {
                   className="f-label text-[#8A8680] hover:text-[#0A0A0A] transition-colors flex items-center gap-2"
                   style={{ fontSize: "9px", letterSpacing: "0.2em" }}
                 >
-                  ? Continue Shopping
+                  ← {t("cart.continue")}
                 </Link>
               </div>
             </div>
@@ -161,24 +163,24 @@ export default function CartPage() {
             <div>
               <div className="bg-[#F5F2EC] p-8">
                 <p className="f-label text-[#B89A6A] mb-8" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
-                  Order Summary
+                  {t("cart.summary")}
                 </p>
 
                 <div className="space-y-3 pb-6 border-b border-[#0A0A0A]/[0.08]">
                   <div className="flex justify-between">
-                    <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>Subtotal</span>
+                    <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.subtotal")}</span>
                     <span className="f-label text-[#0A0A0A]" style={{ fontSize: "12px" }}>${subtotal.toLocaleString()}</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between">
-                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>Discount</span>
+                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.discount")}</span>
                       <span className="f-label text-[#B89A6A]" style={{ fontSize: "12px" }}>-${discount.toLocaleString()}</span>
                     </div>
                   )}
                   <div className="flex justify-between">
-                    <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>Shipping</span>
+                    <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.shipping")}</span>
                     <span className={`f-label ${shipping === 0 ? "text-[#B89A6A]" : "text-[#0A0A0A]"}`} style={{ fontSize: "12px" }}>
-                      {shipping === 0 ? "Free" : `$${shipping}`}
+                      {shipping === 0 ? t("cart.free") : `$${shipping}`}
                     </span>
                   </div>
                   {shipping > 0 && (
@@ -189,7 +191,7 @@ export default function CartPage() {
                 </div>
 
                 <div className="flex justify-between items-baseline pt-6 pb-8">
-                  <span className="f-label text-[#0A0A0A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>Total</span>
+                  <span className="f-label text-[#0A0A0A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>{t("cart.total")}</span>
                   <span className="f-label text-[#0A0A0A]" style={{ fontSize: "18px", fontWeight: 400 }}>${total.toLocaleString()}</span>
                 </div>
 
@@ -197,12 +199,12 @@ export default function CartPage() {
                 <div className="flex mb-8">
                   <input
                     type="text"
-                    placeholder="Promo code"
+                    placeholder={t("cart.promo")}
                     className="flex-1 bg-white border border-[#0A0A0A]/15 px-4 py-2.5 f-label text-[#0A0A0A] placeholder-[#C4C0BB] focus:outline-none focus:border-[#0A0A0A] transition-colors"
                     style={{ fontSize: "10px", letterSpacing: "0.1em" }}
                   />
                   <button className="bg-[#0A0A0A] text-white f-label px-5 py-2.5 hover:bg-[#B89A6A] transition-colors" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
-                    Apply
+                    {t("cart.apply")}
                   </button>
                 </div>
 
@@ -211,15 +213,15 @@ export default function CartPage() {
                   className="flex items-center justify-center gap-3 w-full bg-[#0A0A0A] text-white py-4 f-label hover:bg-[#B89A6A] transition-colors"
                   style={{ fontSize: "9px", letterSpacing: "0.3em" }}
                 >
-                  Proceed to Checkout
+                  {t("cart.checkout")}
                   <ArrowRight size={12} strokeWidth={1.5} />
                 </Link>
 
                 <div className="mt-6 space-y-2">
-                  {["Complimentary shipping over $500", "Free returns within 30 days", "Certificate of Authenticity"].map((t) => (
-                    <p key={t} className="f-label text-[#8A8680] flex items-center gap-2" style={{ fontSize: "8.5px", letterSpacing: "0.12em" }}>
+                  {[t("shortcuts.freeShippingSub"), t("shortcuts.freeReturnsSub"), t("shortcuts.authenticity")].map((line) => (
+                    <p key={line} className="f-label text-[#8A8680] flex items-center gap-2" style={{ fontSize: "8.5px", letterSpacing: "0.12em" }}>
                       <span className="w-1 h-1 bg-[#B89A6A] rounded-full flex-shrink-0" />
-                      {t}
+                      {line}
                     </p>
                   ))}
                 </div>
