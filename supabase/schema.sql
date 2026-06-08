@@ -69,3 +69,16 @@ create policy "public read product images"
   on storage.objects for select
   to anon, authenticated
   using (bucket_id = 'product-images');
+
+-- ============================================================
+-- Push notification device tokens (written via service role only)
+-- ============================================================
+create table if not exists public.push_tokens (
+  token       text primary key,
+  platform    text not null default 'android',
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+alter table public.push_tokens enable row level security;
+-- No public policies: only the service-role key (server) may read/write.

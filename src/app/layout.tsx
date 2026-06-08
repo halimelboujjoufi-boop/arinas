@@ -9,6 +9,7 @@ import CartDrawer from "@/components/layout/CartDrawer";
 import SearchOverlay from "@/components/layout/SearchOverlay";
 import MobileNav from "@/components/layout/MobileNav";
 import QuickView from "@/components/ui/QuickView";
+import NativeBridge from "@/components/NativeBridge";
 import { I18nProvider } from "@/i18n/provider";
 import { getDictionary } from "@/i18n/dictionaries";
 import {
@@ -205,6 +206,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className={`${inter.variable} ${cormorant.variable} ${notoNaskhArabic.variable} antialiased`}>
+        <NativeBridge />
         <I18nProvider locale={locale} dict={dict}>
           {isAdmin ? (
             children

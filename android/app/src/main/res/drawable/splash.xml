@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- On-brand dark splash. Replace with a logo splash by running
+     `npx @capacitor/assets generate` with assets/splash.png (see BUILD-ANDROID.md). -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/splashBackground" />
+</layer-list>

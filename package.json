@@ -10,9 +10,19 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "verify": "npm run lint && npm run typecheck && npm run build:ci",
-    "deploy:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-deployment.ps1"
+    "deploy:setup": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-deployment.ps1",
+    "cap:sync": "cap sync android",
+    "android:open": "cap open android",
+    "android:assets": "capacitor-assets generate --android",
+    "android:apk": "cd android && gradlew.bat assembleRelease",
+    "android:aab": "cd android && gradlew.bat bundleRelease"
   },
   "dependencies": {
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/core": "^8.4.0",
+    "@capacitor/push-notifications": "^8.1.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2",
     "@headlessui/react": "^2.2.10",
     "@radix-ui/react-dialog": "^1.1.15",
     "@stripe/stripe-js": "^9.7.0",
@@ -30,6 +40,8 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.4.0",
+    "@capacitor/cli": "^8.4.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
