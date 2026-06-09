@@ -268,7 +268,7 @@ export default function ProductsManager() {
                   </div>
                 </td>
                 <td className="py-3 px-3 text-xs text-[#71717A] hidden sm:table-cell">{p.category}</td>
-                <td className="py-3 px-3 text-xs font-medium text-[#111111]">${p.price.toLocaleString()}</td>
+                <td className="py-3 px-3 text-xs font-medium text-[#111111]">{p.price.toLocaleString()} DH</td>
                 <td className="py-3 px-3 text-xs text-[#71717A] hidden sm:table-cell">{p.stock}</td>
                 <td className="py-3 px-3">
                   <span className={`text-[9px] tracking-wide uppercase px-2.5 py-1 ${statusStyle[p.status]}`}>{statusLabel[p.status]}</span>
