@@ -265,7 +265,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
                     ? "bg-[#0A0A0A]/20 text-white cursor-not-allowed"
                     : "bg-[#0A0A0A] text-white hover:bg-[#B89A6A]"
                 }`}
-                style={{ fontSize: "11px", letterSpacing: "0.28em" }}
+                style={{ fontSize: "16px", letterSpacing: "0.18em" }}
               >
                 {added ? t("product.added") : t("common.addToBag")}
               </button>
