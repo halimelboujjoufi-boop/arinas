@@ -9,6 +9,15 @@ import { Search, ShoppingBag, Heart, User, Menu, X, ChevronDown } from "lucide-r
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import { useT, useDict } from "@/i18n/provider";
 
+/** "By Season" → "bySeason", "Evening Gowns" → "eveningGowns" */
+function toMegaKey(s: string): string {
+  return s
+    .replace(/[^a-zA-Z0-9 ]/g, "")
+    .split(" ")
+    .map((w, i) => (i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()))
+    .join("");
+}
+
 type MegaMenu = {
   cols: Array<{ title: string; links: string[] }>;
   imgs: Array<{ src: string; label: string; sub: string }>;
@@ -372,7 +381,7 @@ export default function Header() {
                         className="text-[#B89A6A] mb-8"
                         style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "18px", letterSpacing: "0.14em", textTransform: "uppercase" }}
                       >
-                        {col.title}
+                        {t(`navMega.${toMegaKey(col.title)}`, col.title)}
                       </p>
                       <ul className="space-y-5">
                         {col.links.map((name) => (
@@ -389,7 +398,7 @@ export default function Header() {
                                 lineHeight: 1.35,
                               }}
                             >
-                              {name}
+                              {t(`navMega.${toMegaKey(name)}`, name)}
                             </Link>
                           </li>
                         ))}
@@ -418,10 +427,10 @@ export default function Header() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6">
                         <p className="f-label text-white/60 mb-1" style={{ fontSize: "11px", letterSpacing: "0.2em" }}>
-                          {img.sub}
+                          {t(`navMega.${toMegaKey(img.sub)}`, img.sub)}
                         </p>
                         <p className="f-serif text-white" style={{ fontSize: "18px" }}>
-                          {img.label}
+                          {t(`navMega.${toMegaKey(img.label)}`, img.label)}
                         </p>
                       </div>
                     </Link>
@@ -463,15 +472,20 @@ export default function Header() {
 
             <div className="mt-10 pt-8 border-t border-white/[0.07] space-y-6">
               <LanguageSwitcher tone="light" variant="list" />
-              {["signIn", "createAccount", "myOrders"].map((k) => (
-                <a
-                  key={k}
-                  href="#"
+              {[
+                { key: "signIn",        href: "/account/login" },
+                { key: "createAccount", href: "/account/login" },
+                { key: "myOrders",      href: "/account/orders" },
+              ].map((it) => (
+                <Link
+                  key={it.key}
+                  href={it.href}
+                  onClick={() => setMobileOpen(false)}
                   className="block text-white/45 hover:text-white/80 transition-colors"
                   style={{ fontFamily: "Inter, sans-serif", fontWeight: 300, fontSize: "13px", letterSpacing: "0.2em", textTransform: "uppercase" }}
                 >
-                  {t(`account.${k}`)}
-                </a>
+                  {t(`account.${it.key}`)}
+                </Link>
               ))}
             </div>
           </div>
