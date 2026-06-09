@@ -64,7 +64,7 @@ export default function ShopClient({
                   paddingBottom: "7px",
                 }}
               >
-                {cat}
+                {t(`categories.${cat}`, cat)}
               </button>
             ))}
           </div>
@@ -94,7 +94,7 @@ export default function ShopClient({
         {/* Count */}
         <p className="f-label text-[#8A8680] mb-10" style={{ fontSize: "9px", letterSpacing: "0.15em" }}>
           {filtered.length} {filtered.length !== 1 ? t("shop.pieces") : t("shop.piece")}
-          {selectedCategory !== "All" ? ` — ${selectedCategory}` : ""}
+          {selectedCategory !== "All" ? ` — ${t(`categories.${selectedCategory}`, selectedCategory)}` : ""}
         </p>
 
         {/* Grid */}

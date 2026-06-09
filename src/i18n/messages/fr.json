@@ -100,6 +100,27 @@
     "pieces": "pièces",
     "noResults": "Aucune pièce trouvée dans cette catégorie."
   },
+  "categories": {
+    "All": "Tout",
+    "Dresses": "Robes",
+    "Tops": "Tops",
+    "Trousers": "Pantalons",
+    "Blazers": "Blazers",
+    "Coats": "Manteaux",
+    "Bags": "Sacs",
+    "Shoes": "Chaussures",
+    "Jewelry": "Bijoux",
+    "Scarves": "Foulards",
+    "Belts": "Ceintures",
+    "Abayas": "Abayas",
+    "Accessories": "Accessoires",
+    "Skirts": "Jupes",
+    "Jumpsuits": "Combinaisons",
+    "Swimwear": "Maillots de bain",
+    "Lingerie": "Lingerie",
+    "Activewear": "Vêtements de sport",
+    "Uncategorized": "Non catégorisé"
+  },
   "cart": {
     "review": "Récapitulatif",
     "title": "Votre Panier",

@@ -100,6 +100,27 @@
     "pieces": "pieces",
     "noResults": "No pieces found in this category."
   },
+  "categories": {
+    "All": "All",
+    "Dresses": "Dresses",
+    "Tops": "Tops",
+    "Trousers": "Trousers",
+    "Blazers": "Blazers",
+    "Coats": "Coats",
+    "Bags": "Bags",
+    "Shoes": "Shoes",
+    "Jewelry": "Jewelry",
+    "Scarves": "Scarves",
+    "Belts": "Belts",
+    "Abayas": "Abayas",
+    "Accessories": "Accessories",
+    "Skirts": "Skirts",
+    "Jumpsuits": "Jumpsuits",
+    "Swimwear": "Swimwear",
+    "Lingerie": "Lingerie",
+    "Activewear": "Activewear",
+    "Uncategorized": "Uncategorized"
+  },
   "cart": {
     "review": "Review",
     "title": "Your Bag",

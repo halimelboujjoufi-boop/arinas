@@ -100,6 +100,27 @@
     "pieces": "قطع",
     "noResults": "لا توجد قطع في هذه الفئة."
   },
+  "categories": {
+    "All": "الكل",
+    "Dresses": "فساتين",
+    "Tops": "توبات",
+    "Trousers": "بناطيل",
+    "Blazers": "بليزرات",
+    "Coats": "معاطف",
+    "Bags": "حقائب",
+    "Shoes": "أحذية",
+    "Jewelry": "مجوهرات",
+    "Scarves": "أوشحة",
+    "Belts": "أحزمة",
+    "Abayas": "عبايات",
+    "Accessories": "إكسسوارات",
+    "Skirts": "تنانير",
+    "Jumpsuits": "جمبسوت",
+    "Swimwear": "ملابس السباحة",
+    "Lingerie": "لانجري",
+    "Activewear": "ملابس رياضية",
+    "Uncategorized": "غير مصنف"
+  },
   "cart": {
     "review": "مراجعة",
     "title": "حقيبتك",
