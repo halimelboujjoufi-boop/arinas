@@ -94,7 +94,7 @@ export default function LookbookSection() {
                       </p>
                     </Link>
                     <p className="f-label text-[#8A8680] mt-0.5 whitespace-nowrap" style={{ fontSize: "10px" }}>
-                      ${product.price.toLocaleString()}
+                      {} DH
                     </p>
                   </div>
                   <button

@@ -104,7 +104,7 @@ export default function SearchOverlay() {
                   </p>
                 </div>
                 <span className="f-label text-[#0A0A0A] flex-shrink-0" style={{ fontSize: "11px" }}>
-                  ${product.price.toLocaleString()}
+                  {} DH
                 </span>
                 <ArrowRight size={13} strokeWidth={1.5} className="text-[#8A8680] group-hover:text-[#B89A6A] transition-colors flex-shrink-0" />
               </Link>

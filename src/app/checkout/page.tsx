@@ -184,9 +184,9 @@ export default function CheckoutPage() {
                 <div className="mt-5 space-y-2">
                   <label className={labelClass}>Shipping Method</label>
                   {[
-                    { id: "standard", label: "Standard Shipping", sub: "5-7 business days", price: subtotal > 500 ? "Free" : "$35" },
-                    { id: "express", label: "Express Shipping", sub: "2-3 business days", price: "$25" },
-                    { id: "overnight", label: "Overnight Delivery", sub: "Next business day", price: "$65" },
+                    { id: "standard", label: "Standard Shipping", sub: "5-7 business days", price: subtotal > 500 ? "Free" : "35 DH" },
+                    { id: "express", label: "Express Shipping", sub: "2-3 business days", price: "25 DH" },
+                    { id: "overnight", label: "Overnight Delivery", sub: "Next business day", price: "65 DH" },
                   ].map((method) => (
                     <label key={method.id} className="flex items-center gap-3 border border-[#E4E4E7] p-4 cursor-pointer hover:border-[#B89A6A] transition-colors">
                       <input type="radio" name="shipping" defaultChecked={method.id === "standard"} className="accent-[#B89A6A]" />
@@ -211,7 +211,7 @@ export default function CheckoutPage() {
                     className="w-4 h-4 accent-[#B89A6A]"
                   />
                   <Gift size={15} className="text-[#B89A6A]" />
-                  <span className="text-sm font-medium">Add gift wrapping (+$12)</span>
+                  <span className="text-sm font-medium">Add gift wrapping (+12 DH)</span>
                 </label>
                 {form.giftWrap && (
                   <div className="mt-4">
@@ -311,7 +311,7 @@ export default function CheckoutPage() {
                 className="w-full bg-[#B89A6A] text-white text-[11px] tracking-[0.3em] uppercase py-5 hover:bg-[#B8963A] transition-colors flex items-center justify-center gap-3 font-medium"
               >
                 <Lock size={14} />
-                Place Order - ${total.toLocaleString()}
+                Place Order - {} DH
               </button>
 
               <p className="text-[10px] text-[#8A8680] text-center flex items-center justify-center gap-1.5">
@@ -333,7 +333,7 @@ export default function CheckoutPage() {
                     <ChevronDown size={14} className={`transition-transform ${summaryExpanded ? "rotate-180" : ""}`} />
                     Order Summary
                   </span>
-                  <span className="text-sm font-medium">${total.toLocaleString()}</span>
+                  <span className="text-sm font-medium">{} DH</span>
                 </button>
 
                 <div className={`bg-white border border-[#E4E4E7] ${!summaryExpanded ? "hidden lg:block" : "block"}`}>
@@ -353,7 +353,7 @@ export default function CheckoutPage() {
                             <p className="text-xs font-medium text-[#0A0A0A] line-clamp-2 leading-snug">{item.name}</p>
                             {item.selectedSize && <p className="text-[10px] text-[#8A8680] mt-0.5">Size: {item.selectedSize}</p>}
                           </div>
-                          <p className="text-xs font-medium text-[#0A0A0A] flex-shrink-0">${(item.price * item.quantity).toLocaleString()}</p>
+                          <p className="text-xs font-medium text-[#0A0A0A] flex-shrink-0">{} DH</p>
                         </div>
                       ))}
                     </div>
@@ -402,27 +402,27 @@ export default function CheckoutPage() {
                   <div className="p-6 space-y-3">
                     <div className="flex justify-between text-xs text-[#8A8680]">
                       <span>Subtotal</span>
-                      <span>${subtotal.toLocaleString()}</span>
+                      <span>{} DH</span>
                     </div>
                     {discount > 0 && (
                       <div className="flex justify-between text-xs text-[#B89A6A]">
                         <span>Discount ({state.couponDiscount}%)</span>
-                        <span>-${discount.toLocaleString()}</span>
+                        <span>-{} DH</span>
                       </div>
                     )}
                     {form.giftWrap && (
                       <div className="flex justify-between text-xs text-[#8A8680]">
                         <span>Gift Wrapping</span>
-                        <span>$12</span>
+                        <span>12 DH</span>
                       </div>
                     )}
                     <div className="flex justify-between text-xs text-[#8A8680]">
                       <span>Shipping</span>
-                      <span className={shipping === 0 ? "text-[#B89A6A]" : ""}>{shipping === 0 ? "Free" : `$${shipping}`}</span>
+                      <span className={shipping === 0 ? "text-[#B89A6A]" : ""}>{shipping === 0 ? "Free" : `${} DH`}</span>
                     </div>
                     <div className="flex justify-between font-medium border-t border-[#F0EBE3] pt-3">
                       <span className="text-sm">Total</span>
-                      <span className="text-base">${(total + (form.giftWrap ? 12 : 0)).toLocaleString()}</span>
+                      <span className="text-base">{} DH</span>
                     </div>
                   </div>
 

@@ -122,11 +122,11 @@ export default function QuickView() {
             {/* Price row */}
             <div className="flex items-baseline gap-4 mb-7">
               <span className="f-label text-[#0A0A0A]" style={{ fontSize: "16px", letterSpacing: "0.05em", fontWeight: 400 }}>
-                ${product.price.toLocaleString()}
+                {} DH
               </span>
               {product.originalPrice && (
                 <span className="f-label text-[#8A8680] line-through" style={{ fontSize: "13px" }}>
-                  ${product.originalPrice.toLocaleString()}
+                  {} DH
                 </span>
               )}
             </div>

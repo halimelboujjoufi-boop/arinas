@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826392850429",
+    "project_id": "arinas-191d6",
+    "storage_bucket": "arinas-191d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826392850429:android:38c56513238ff25b607394",
+        "android_client_info": {
+          "package_name": "ma.arinas.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2iN9aJ5fjHVEB9cKXRwqJ3hIrullbX7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

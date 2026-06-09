@@ -102,7 +102,7 @@ export default function CartPage() {
                         <div className="flex flex-wrap items-center justify-between gap-3 mt-auto pt-2">
                           {/* Price */}
                           <span className="f-label text-[#0A0A0A]" style={{ fontSize: "13px", fontWeight: 400, letterSpacing: "0.04em" }}>
-                            ${item.price.toLocaleString()}
+                            {item.price.toLocaleString()} DH
                           </span>
 
                           {/* Qty controls */}
@@ -131,7 +131,7 @@ export default function CartPage() {
                           {/* Line total + remove */}
                           <div className="flex items-center gap-3">
                             <span className="f-label text-[#0A0A0A] whitespace-nowrap" style={{ fontSize: "13px", fontWeight: 400 }}>
-                              ${(item.price * item.quantity).toLocaleString()}
+                              {(item.price * item.quantity).toLocaleString()} DH
                             </span>
                             <button
                               onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: item.id })}
@@ -169,30 +169,30 @@ export default function CartPage() {
                 <div className="space-y-3 pb-6 border-b border-[#0A0A0A]/[0.08]">
                   <div className="flex justify-between">
                     <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.subtotal")}</span>
-                    <span className="f-label text-[#0A0A0A]" style={{ fontSize: "12px" }}>${subtotal.toLocaleString()}</span>
+                    <span className="f-label text-[#0A0A0A]" style={{ fontSize: "12px" }}>{subtotal.toLocaleString()} DH</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between">
                       <span className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.discount")}</span>
-                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "12px" }}>-${discount.toLocaleString()}</span>
+                      <span className="f-label text-[#B89A6A]" style={{ fontSize: "12px" }}>-{discount.toLocaleString()} DH</span>
                     </div>
                   )}
                   <div className="flex justify-between">
                     <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.shipping")}</span>
                     <span className={`f-label ${shipping === 0 ? "text-[#B89A6A]" : "text-[#0A0A0A]"}`} style={{ fontSize: "12px" }}>
-                      {shipping === 0 ? t("cart.free") : `$${shipping}`}
+                      {shipping === 0 ? t("cart.free") : `${} DH`}
                     </span>
                   </div>
                   {shipping > 0 && (
                     <p className="f-label text-[#B89A6A]" style={{ fontSize: "8.5px", letterSpacing: "0.15em" }}>
-                      Add ${(500 - subtotal).toLocaleString()} more for free shipping
+                      Add {(500 - subtotal).toLocaleString()} DH more for free shipping
                     </p>
                   )}
                 </div>
 
                 <div className="flex justify-between items-baseline pt-6 pb-8">
                   <span className="f-label text-[#0A0A0A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>{t("cart.total")}</span>
-                  <span className="f-label text-[#0A0A0A]" style={{ fontSize: "18px", fontWeight: 400 }}>${total.toLocaleString()}</span>
+                  <span className="f-label text-[#0A0A0A]" style={{ fontSize: "18px", fontWeight: 400 }}>{total.toLocaleString()} DH</span>
                 </div>
 
                 {/* Promo code */}

@@ -49,7 +49,7 @@ export default function CartDrawer() {
             <div className="flex items-center gap-2 mb-1.5">
               <Truck size={13} className="text-[#C9A86A]" />
               <p className="text-[11px] text-[#52525B]">
-                Add <span className="font-medium text-[#111111]">${(500 - subtotal).toLocaleString()}</span> more for free shipping
+                Add <span className="font-medium text-[#111111]">{} DH</span> more for free shipping
               </p>
             </div>
             <div className="h-1 bg-[#E4E4E7] rounded-full overflow-hidden">
@@ -134,7 +134,7 @@ export default function CartDrawer() {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-medium text-[#111111]">
-                          ${(item.price * item.quantity).toLocaleString()}
+                          {} DH
                         </span>
                         <button
                           aria-label={`Remove ${item.name} from cart`}
@@ -165,21 +165,21 @@ export default function CartDrawer() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-[#71717A]">
                 <span>Subtotal</span>
-                <span>${subtotal.toLocaleString()}</span>
+                <span>{} DH</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-xs text-[#C9A86A]">
                   <span>Discount ({state.couponCode})</span>
-                  <span>-${discount.toLocaleString()}</span>
+                  <span>-{} DH</span>
                 </div>
               )}
               <div className="flex justify-between text-xs text-[#71717A]">
                 <span>Shipping</span>
-                <span className={shipping === 0 ? "text-[#C9A86A]" : ""}>{shipping === 0 ? "Free" : `$${shipping}`}</span>
+                <span className={shipping === 0 ? "text-[#C9A86A]" : ""}>{shipping === 0 ? "Free" : `${} DH`}</span>
               </div>
               <div className="flex justify-between font-medium border-t border-[#F0EBE3] pt-2">
                 <span className="text-sm">Total</span>
-                <span className="text-base">${total.toLocaleString()}</span>
+                <span className="text-base">{} DH</span>
               </div>
             </div>
 
