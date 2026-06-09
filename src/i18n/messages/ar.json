@@ -100,6 +100,28 @@
     "pieces": "قطع",
     "noResults": "لا توجد قطع في هذه الفئة."
   },
+  "collectionsPage": {
+    "eyebrow": "المجموعات",
+    "title": "المجموعات",
+    "pieces": "قطع",
+    "explore": "استكشاف",
+    "summer": {
+      "name": "مجموعة الصيف",
+      "description": "أناقة سهلة لأيام دافئة"
+    },
+    "casual": {
+      "name": "الفخامة اليومية",
+      "description": "رقي يومي ومصقول"
+    },
+    "luxury": {
+      "name": "مجموعة الفخامة",
+      "description": "قمة الإتقان في الكوتور"
+    },
+    "limited": {
+      "name": "إصدار محدود",
+      "description": "قطع حصرية للذوق الرفيع"
+    }
+  },
   "categories": {
     "All": "الكل",
     "Dresses": "فساتين",
