@@ -36,9 +36,39 @@ const statusConfig: Record<string, { color: string; icon: typeof CheckCircle; la
 
 type NavItem = "dashboard" | "products" | "orders" | "customers" | "discounts" | "analytics" | "settings";
 
+const SETTINGS_KEY = "arinas_admin_settings";
+
+const defaultSettings = {
+  storeName: "ARINAS",
+  storeEmail: "contact@arinas.com",
+  currency: "MAD (DH)",
+  language: "English",
+  freeShipping: "500 DH",
+  shippingCost: "35 DH",
+};
+
 export default function AdminPage() {
   const [activeNav, setActiveNav] = useState<NavItem>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [savedOk, setSavedOk] = useState<string | null>(null);
+
+  const [storeSettings, setStoreSettings] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const s = localStorage.getItem(SETTINGS_KEY);
+        return s ? JSON.parse(s) : defaultSettings;
+      } catch { return defaultSettings; }
+    }
+    return defaultSettings;
+  });
+
+  const handleSave = (section: "store" | "shipping") => {
+    try {
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(storeSettings));
+      setSavedOk(section);
+      setTimeout(() => setSavedOk(null), 2500);
+    } catch {}
+  };
 
   const handleLogout = async () => {
     try {
@@ -386,34 +416,73 @@ export default function AdminPage() {
           {/* SETTINGS */}
           {activeNav === "settings" && (
             <div className="max-w-2xl space-y-6">
-              {[
-                { title: "Store Information", fields: [
-                  { label: "Store Name", value: "ARINAS" },
-                  { label: "Store Email", value: "contact@arinas.com" },
-                  { label: "Currency", value: "MAD (DH)" },
-                  { label: "Language", value: "English" },
-                ]},
-                { title: "Shipping Settings", fields: [
-                  { label: "Free Shipping Threshold", value: "500 DH" },
-                  { label: "Default Shipping Cost", value: "35 DH" },
-                ]},
-              ].map((section) => (
-                <div key={section.title} className="bg-white border border-[#E4E4E7] p-6">
-                  <h3 className="text-sm font-medium text-[#111111] mb-5 pb-3 border-b border-[#F0EBE3]">{section.title}</h3>
-                  <div className="space-y-4">
-                    {section.fields.map((field) => (
-                      <div key={field.label} className="grid grid-cols-2 items-center gap-4">
-                        <label className="text-[11px] tracking-wider uppercase text-[#71717A] font-medium">{field.label}</label>
-                        <input defaultValue={field.value}
-                          className="border border-[#E4E4E7] px-3 py-2 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors" />
-                      </div>
-                    ))}
-                  </div>
-                  <button className="mt-5 bg-[#111111] text-white text-[10px] tracking-[0.2em] uppercase px-5 py-2.5 hover:bg-[#C9A86A] transition-colors">
+              {/* Store Information */}
+              <div className="bg-white border border-[#E4E4E7] p-6">
+                <h3 className="text-sm font-medium text-[#111111] mb-5 pb-3 border-b border-[#F0EBE3]">Store Information</h3>
+                <div className="space-y-4">
+                  {[
+                    { label: "Store Name", key: "storeName" },
+                    { label: "Store Email", key: "storeEmail" },
+                    { label: "Currency", key: "currency" },
+                    { label: "Language", key: "language" },
+                  ].map((f) => (
+                    <div key={f.key} className="grid grid-cols-2 items-center gap-4">
+                      <label className="text-[11px] tracking-wider uppercase text-[#71717A] font-medium">{f.label}</label>
+                      <input
+                        value={storeSettings[f.key as keyof typeof storeSettings]}
+                        onChange={(e) => setStoreSettings((p: typeof defaultSettings) => ({ ...p, [f.key]: e.target.value }))}
+                        className="border border-[#E4E4E7] px-3 py-2 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex items-center gap-4">
+                  <button
+                    onClick={() => handleSave("store")}
+                    className="bg-[#111111] text-white text-[10px] tracking-[0.2em] uppercase px-5 py-2.5 hover:bg-[#C9A86A] transition-colors"
+                  >
                     Save Changes
                   </button>
+                  {savedOk === "store" && (
+                    <span className="text-[11px] text-emerald-600 tracking-wide flex items-center gap-1">
+                      <CheckCircle size={13} /> Saved
+                    </span>
+                  )}
                 </div>
-              ))}
+              </div>
+
+              {/* Shipping Settings */}
+              <div className="bg-white border border-[#E4E4E7] p-6">
+                <h3 className="text-sm font-medium text-[#111111] mb-5 pb-3 border-b border-[#F0EBE3]">Shipping Settings</h3>
+                <div className="space-y-4">
+                  {[
+                    { label: "Free Shipping Threshold", key: "freeShipping" },
+                    { label: "Default Shipping Cost", key: "shippingCost" },
+                  ].map((f) => (
+                    <div key={f.key} className="grid grid-cols-2 items-center gap-4">
+                      <label className="text-[11px] tracking-wider uppercase text-[#71717A] font-medium">{f.label}</label>
+                      <input
+                        value={storeSettings[f.key as keyof typeof storeSettings]}
+                        onChange={(e) => setStoreSettings((p: typeof defaultSettings) => ({ ...p, [f.key]: e.target.value }))}
+                        className="border border-[#E4E4E7] px-3 py-2 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex items-center gap-4">
+                  <button
+                    onClick={() => handleSave("shipping")}
+                    className="bg-[#111111] text-white text-[10px] tracking-[0.2em] uppercase px-5 py-2.5 hover:bg-[#C9A86A] transition-colors"
+                  >
+                    Save Changes
+                  </button>
+                  {savedOk === "shipping" && (
+                    <span className="text-[11px] text-emerald-600 tracking-wide flex items-center gap-1">
+                      <CheckCircle size={13} /> Saved
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>
