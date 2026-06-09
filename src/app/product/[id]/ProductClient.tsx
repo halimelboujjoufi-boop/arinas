@@ -58,7 +58,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
       key: "details",
       label: t("product.details"),
       content: (
-        <div className="space-y-3 f-body" style={{ fontSize: "12px", lineHeight: 1.9 }}>
+        <div className="space-y-3 f-body" style={{ fontSize: "15px", lineHeight: 1.9 }}>
           <p>{product.description || t("product.defaultDescription")}</p>
           <ul className="space-y-1 mt-4">
             <li>{t("product.material")}: {product.material || "100% Silk Georgette"}</li>
@@ -73,7 +73,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
       key: "care",
       label: t("product.care"),
       content: (
-        <ul className="f-body space-y-2" style={{ fontSize: "12px" }}>
+        <ul className="f-body space-y-2" style={{ fontSize: "15px" }}>
           {(["care1", "care2", "care3", "care4"] as const).map((key) => (
             <li key={key} className="flex items-center gap-3">
               <span className="w-1 h-1 bg-[#B89A6A] rounded-full flex-shrink-0" />
@@ -87,7 +87,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
       key: "delivery",
       label: t("product.delivery"),
       content: (
-        <div className="f-body space-y-2" style={{ fontSize: "12px" }}>
+        <div className="f-body space-y-2" style={{ fontSize: "15px" }}>
           <p>{t("product.deliveryText")}</p>
           <p className="mt-3">{t("product.returnsText")}</p>
         </div>
@@ -291,7 +291,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
                     onClick={() => toggleAccordion(key)}
                     className="flex items-center justify-between w-full py-5 text-left"
                   >
-                    <span className="f-label text-[#0A0A0A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>
+                    <span className="f-label text-[#0A0A0A]" style={{ fontSize: "14px", letterSpacing: "0.15em" }}>
                       {label}
                     </span>
                     <ChevronDown
