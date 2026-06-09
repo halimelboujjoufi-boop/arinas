@@ -36,47 +36,23 @@ const statusConfig: Record<string, { color: string; icon: typeof CheckCircle; la
 
 type NavItem = "dashboard" | "products" | "orders" | "customers" | "discounts" | "analytics" | "settings";
 
-const SETTINGS_KEY = "arinas_admin_settings";
-
-const defaultSettings = {
-  storeName: "ARINAS",
-  storeEmail: "contact@arinas.com",
-  currency: "MAD (DH)",
-  language: "English",
-  freeShipping: "500 DH",
-  shippingCost: "35 DH",
-};
-
 export default function AdminPage() {
   const [activeNav, setActiveNav] = useState<NavItem>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [savedOk, setSavedOk] = useState<string | null>(null);
 
-  const [storeSettings, setStoreSettings] = useState(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const s = localStorage.getItem(SETTINGS_KEY);
-        if (s) {
-          const parsed = JSON.parse(s);
-          // migrate old $ values to DH
-          const needsMigration = Object.values(parsed).some((v) => typeof v === "string" && v.includes("$"));
-          if (needsMigration) {
-            localStorage.removeItem(SETTINGS_KEY);
-            return defaultSettings;
-          }
-          return parsed;
-        }
-      } catch { /* ignore */ }
-    }
-    return defaultSettings;
+  const [storeSettings, setStoreSettings] = useState({
+    storeName: "ARINAS",
+    storeEmail: "contact@arinas.com",
+    currency: "MAD (DH)",
+    language: "English",
+    freeShipping: "500 DH",
+    shippingCost: "35 DH",
   });
 
   const handleSave = (section: "store" | "shipping") => {
-    try {
-      localStorage.setItem(SETTINGS_KEY, JSON.stringify(storeSettings));
-      setSavedOk(section);
-      setTimeout(() => setSavedOk(null), 2500);
-    } catch {}
+    setSavedOk(section);
+    setTimeout(() => setSavedOk(null), 2500);
   };
 
   const handleLogout = async () => {
