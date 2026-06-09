@@ -180,7 +180,7 @@ export default function CartPage() {
                   <div className="flex justify-between">
                     <span className="f-label text-[#8A8680]" style={{ fontSize: "10px", letterSpacing: "0.12em" }}>{t("cart.shipping")}</span>
                     <span className={`f-label ${shipping === 0 ? "text-[#B89A6A]" : "text-[#0A0A0A]"}`} style={{ fontSize: "12px" }}>
-                      {shipping === 0 ? t("cart.free") : `${} DH`}
+                      {shipping === 0 ? t("cart.free") : `${shipping.toLocaleString()} DH`}
                     </span>
                   </div>
                   {shipping > 0 && (

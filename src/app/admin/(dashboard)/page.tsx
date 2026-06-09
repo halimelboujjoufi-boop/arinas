@@ -415,7 +415,7 @@ export default function AdminPage() {
                       <label className="text-[11px] tracking-wider uppercase text-[#71717A] font-medium">{f.label}</label>
                       <input
                         value={storeSettings[f.key as keyof typeof storeSettings]}
-                        onChange={(e) => setStoreSettings((p: typeof defaultSettings) => ({ ...p, [f.key]: e.target.value }))}
+                        onChange={(e) => setStoreSettings((p: typeof storeSettings) => ({ ...p, [f.key]: e.target.value }))}
                         className="border border-[#E4E4E7] px-3 py-2 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors"
                       />
                     </div>
@@ -448,7 +448,7 @@ export default function AdminPage() {
                       <label className="text-[11px] tracking-wider uppercase text-[#71717A] font-medium">{f.label}</label>
                       <input
                         value={storeSettings[f.key as keyof typeof storeSettings]}
-                        onChange={(e) => setStoreSettings((p: typeof defaultSettings) => ({ ...p, [f.key]: e.target.value }))}
+                        onChange={(e) => setStoreSettings((p: typeof storeSettings) => ({ ...p, [f.key]: e.target.value }))}
                         className="border border-[#E4E4E7] px-3 py-2 text-sm focus:outline-none focus:border-[#C9A86A] transition-colors"
                       />
                     </div>

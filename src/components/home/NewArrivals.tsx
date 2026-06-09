@@ -163,11 +163,11 @@ function EditorialCard({ product, large = false }: { product: (typeof products)[
           </h3>
           <div className="text-right flex-shrink-0 pt-px">
             <span className="f-label text-[#0A0A0A] whitespace-nowrap" style={{ fontSize: "15px", letterSpacing: "0.03em", fontWeight: 400 }}>
-              {} DH
+              {product.price.toLocaleString()} DH
             </span>
             {product.originalPrice && (
               <span className="block f-label text-[#8A8680] line-through whitespace-nowrap" style={{ fontSize: "12px" }}>
-                {} DH
+                {product.originalPrice.toLocaleString()} DH
               </span>
             )}
           </div>

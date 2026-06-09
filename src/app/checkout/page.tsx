@@ -311,7 +311,7 @@ export default function CheckoutPage() {
                 className="w-full bg-[#B89A6A] text-white text-[11px] tracking-[0.3em] uppercase py-5 hover:bg-[#B8963A] transition-colors flex items-center justify-center gap-3 font-medium"
               >
                 <Lock size={14} />
-                Place Order - {} DH
+                Place Order - {total.toLocaleString()} DH
               </button>
 
               <p className="text-[10px] text-[#8A8680] text-center flex items-center justify-center gap-1.5">
@@ -333,7 +333,7 @@ export default function CheckoutPage() {
                     <ChevronDown size={14} className={`transition-transform ${summaryExpanded ? "rotate-180" : ""}`} />
                     Order Summary
                   </span>
-                  <span className="text-sm font-medium">{} DH</span>
+                  <span className="text-sm font-medium">{total.toLocaleString()} DH</span>
                 </button>
 
                 <div className={`bg-white border border-[#E4E4E7] ${!summaryExpanded ? "hidden lg:block" : "block"}`}>
@@ -353,7 +353,7 @@ export default function CheckoutPage() {
                             <p className="text-xs font-medium text-[#0A0A0A] line-clamp-2 leading-snug">{item.name}</p>
                             {item.selectedSize && <p className="text-[10px] text-[#8A8680] mt-0.5">Size: {item.selectedSize}</p>}
                           </div>
-                          <p className="text-xs font-medium text-[#0A0A0A] flex-shrink-0">{} DH</p>
+                          <p className="text-xs font-medium text-[#0A0A0A] flex-shrink-0">{(item.price * item.quantity).toLocaleString()} DH</p>
                         </div>
                       ))}
                     </div>
@@ -402,12 +402,12 @@ export default function CheckoutPage() {
                   <div className="p-6 space-y-3">
                     <div className="flex justify-between text-xs text-[#8A8680]">
                       <span>Subtotal</span>
-                      <span>{} DH</span>
+                      <span>{subtotal.toLocaleString()} DH</span>
                     </div>
                     {discount > 0 && (
                       <div className="flex justify-between text-xs text-[#B89A6A]">
                         <span>Discount ({state.couponDiscount}%)</span>
-                        <span>-{} DH</span>
+                        <span>-{discount.toLocaleString()} DH</span>
                       </div>
                     )}
                     {form.giftWrap && (
@@ -418,11 +418,11 @@ export default function CheckoutPage() {
                     )}
                     <div className="flex justify-between text-xs text-[#8A8680]">
                       <span>Shipping</span>
-                      <span className={shipping === 0 ? "text-[#B89A6A]" : ""}>{shipping === 0 ? "Free" : `${} DH`}</span>
+                      <span className={shipping === 0 ? "text-[#B89A6A]" : ""}>{shipping === 0 ? "Free" : `${shipping.toLocaleString()} DH`}</span>
                     </div>
                     <div className="flex justify-between font-medium border-t border-[#F0EBE3] pt-3">
                       <span className="text-sm">Total</span>
-                      <span className="text-base">{} DH</span>
+                      <span className="text-base">{total.toLocaleString()} DH</span>
                     </div>
                   </div>
 
