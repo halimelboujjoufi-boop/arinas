@@ -50,7 +50,17 @@
     "welcome": "Welcome to the ARINAS Circle.",
     "privacy": "Privacy",
     "terms": "Terms",
-    "cookies": "Cookies"
+    "cookies": "Cookies",
+    "newArrivals": "New Arrivals",
+    "collections": "Collections",
+    "theEdit": "The Edit",
+    "lookbook": "Lookbook",
+    "atelier": "Atelier",
+    "sizeGuide": "Size Guide",
+    "shipping": "Shipping",
+    "returns": "Returns",
+    "authenticity": "Authenticity",
+    "contact": "Contact"
   },
   "common": {
     "discover": "Discover",

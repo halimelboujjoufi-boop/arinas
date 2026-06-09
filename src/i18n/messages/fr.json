@@ -50,7 +50,17 @@
     "welcome": "Bienvenue dans le Cercle ARINAS.",
     "privacy": "Confidentialité",
     "terms": "Conditions",
-    "cookies": "Cookies"
+    "cookies": "Cookies",
+    "newArrivals": "Nouveautés",
+    "collections": "Collections",
+    "theEdit": "La Sélection",
+    "lookbook": "Lookbook",
+    "atelier": "Atelier",
+    "sizeGuide": "Guide des tailles",
+    "shipping": "Livraison",
+    "returns": "Retours",
+    "authenticity": "Authenticité",
+    "contact": "Contact"
   },
   "common": {
     "discover": "Découvrir",

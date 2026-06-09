@@ -58,14 +58,20 @@ export default function Footer() {
                 {t("footer.house")}
               </p>
               <ul className="space-y-4">
-                {["New Arrivals", "Collections", "The Edit", "Lookbook", "Atelier"].map((item) => (
-                  <li key={item}>
+                {[
+                  { key: "newArrivals", href: "/new-arrivals" },
+                  { key: "collections", href: "/collections" },
+                  { key: "theEdit",     href: "/shop" },
+                  { key: "lookbook",    href: "/shop" },
+                  { key: "atelier",     href: "/about" },
+                ].map((item) => (
+                  <li key={item.key}>
                     <Link
-                      href="/shop"
+                      href={item.href}
                       className="f-label text-white/40 hover:text-white transition-colors"
                       style={{ fontSize: "10px", letterSpacing: "0.12em" }}
                     >
-                      {item}
+                      {t(`footer.${item.key}`)}
                     </Link>
                   </li>
                 ))}
@@ -76,14 +82,20 @@ export default function Footer() {
                 {t("footer.clientCare")}
               </p>
               <ul className="space-y-4">
-                {["Size Guide", "Shipping", "Returns", "Authenticity", "Contact"].map((item) => (
-                  <li key={item}>
+                {[
+                  { key: "sizeGuide",    href: "/contact" },
+                  { key: "shipping",     href: "/contact" },
+                  { key: "returns",      href: "/contact" },
+                  { key: "authenticity", href: "/contact" },
+                  { key: "contact",      href: "/contact" },
+                ].map((item) => (
+                  <li key={item.key}>
                     <Link
-                      href="/contact"
+                      href={item.href}
                       className="f-label text-white/40 hover:text-white transition-colors"
                       style={{ fontSize: "10px", letterSpacing: "0.12em" }}
                     >
-                      {item}
+                      {t(`footer.${item.key}`)}
                     </Link>
                   </li>
                 ))}
