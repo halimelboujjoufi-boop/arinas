@@ -32,7 +32,7 @@ export default function Footer() {
                 ARINAS
               </span>
             </Link>
-            <p className="f-body mt-6 max-w-xs" style={{ color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>
+            <p className="f-body mt-6 max-w-xs" style={{ color: "rgba(255,255,255,0.4)", lineHeight: 1.8, fontSize: "14px" }}>
               {t("footer.tagline")}
             </p>
 
@@ -43,7 +43,7 @@ export default function Footer() {
                   key={s}
                   href="#"
                   className="f-label text-white/30 hover:text-white transition-colors"
-                  style={{ fontSize: "9px", letterSpacing: "0.2em" }}
+                  style={{ fontSize: "12px", letterSpacing: "0.2em" }}
                 >
                   {s}
                 </a>
@@ -54,7 +54,7 @@ export default function Footer() {
           {/* Nav columns */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-10">
             <div>
-              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
+              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
                 {t("footer.house")}
               </p>
               <ul className="space-y-4">
@@ -69,7 +69,7 @@ export default function Footer() {
                     <Link
                       href={item.href}
                       className="f-label text-white/40 hover:text-white transition-colors"
-                      style={{ fontSize: "10px", letterSpacing: "0.12em" }}
+                      style={{ fontSize: "13px", letterSpacing: "0.08em" }}
                     >
                       {t(`footer.${item.key}`)}
                     </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
+              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
                 {t("footer.clientCare")}
               </p>
               <ul className="space-y-4">
@@ -93,7 +93,7 @@ export default function Footer() {
                     <Link
                       href={item.href}
                       className="f-label text-white/40 hover:text-white transition-colors"
-                      style={{ fontSize: "10px", letterSpacing: "0.12em" }}
+                      style={{ fontSize: "13px", letterSpacing: "0.08em" }}
                     >
                       {t(`footer.${item.key}`)}
                     </Link>
@@ -105,14 +105,14 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div className="lg:col-span-3">
-            <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "9px", letterSpacing: "0.3em" }}>
+            <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "12px", letterSpacing: "0.3em" }}>
               {t("footer.circle")}
             </p>
-            <p className="f-body mb-6" style={{ color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>
+            <p className="f-body mb-6" style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px" }}>
               {t("footer.circleText")}
             </p>
             {submitted ? (
-              <p className="f-label text-[#B89A6A]" style={{ fontSize: "10px", letterSpacing: "0.2em" }}>
+              <p className="f-label text-[#B89A6A]" style={{ fontSize: "13px", letterSpacing: "0.2em" }}>
                 {t("footer.welcome")}
               </p>
             ) : (
@@ -124,12 +124,12 @@ export default function Footer() {
                   placeholder={t("footer.emailPlaceholder")}
                   required
                   className="w-full bg-transparent border-b border-white/20 py-2.5 text-white placeholder-white/25 focus:outline-none focus:border-white/50 transition-colors f-label"
-                  style={{ fontSize: "11px", letterSpacing: "0.08em" }}
+                  style={{ fontSize: "13px", letterSpacing: "0.08em" }}
                 />
                 <button
                   type="submit"
                   className="f-label text-[#B89A6A] hover:text-white transition-colors"
-                  style={{ fontSize: "9px", letterSpacing: "0.25em" }}
+                  style={{ fontSize: "12px", letterSpacing: "0.25em" }}
                 >
                   {t("footer.subscribe")}
                 </button>
@@ -142,7 +142,7 @@ export default function Footer() {
       {/* Divider with address */}
       <div className="border-t border-white/[0.07]">
         <div className="max-w-[1680px] mx-auto px-6 lg:px-14 py-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-          <p className="f-label text-white/25" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
+          <p className="f-label text-white/25" style={{ fontSize: "12px", letterSpacing: "0.2em" }}>
             2025 ARINAS - 12 Rue de la Paix, Paris
           </p>
           <div className="flex gap-6">
@@ -151,7 +151,7 @@ export default function Footer() {
                 key={k}
                 href="#"
                 className="f-label text-white/25 hover:text-white/60 transition-colors"
-                style={{ fontSize: "9px", letterSpacing: "0.15em" }}
+                style={{ fontSize: "12px", letterSpacing: "0.15em" }}
               >
                 {t(`footer.${k}`)}
               </a>
