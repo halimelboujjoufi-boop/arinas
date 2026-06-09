@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import { Product } from "@/lib/store";
 import { useStore } from "@/lib/store";
+import { useT } from "@/i18n/provider";
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const { state, dispatch } = useStore();
+  const t = useT();
   const [hovered, setHovered] = useState(false);
   const inWishlist = state.wishlist.some((p) => p.id === product.id);
 
@@ -61,12 +63,12 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         )}
         {product.isNew && product.badge !== "SALE" && (
           <span className="absolute top-4 left-4 f-label text-[#0A0A0A] bg-white px-3.5 py-2" style={{ fontSize: "11px" }}>
-            New
+            {t("product.newArrival", "New")}
           </span>
         )}
         {product.badge === "LIMITED" && (
           <span className="absolute top-4 left-4 f-label text-white bg-[#0A0A0A] px-3.5 py-2" style={{ fontSize: "11px" }}>
-            Limited
+            {t("navMega.limitedEdition", "Limited")}
           </span>
         )}
 
@@ -102,7 +104,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
             className="w-full bg-white/95 backdrop-blur-sm py-4 f-label text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-colors"
             style={{ fontSize: "12px", letterSpacing: "0.2em" }}
           >
-            Quick View
+            {t("common.quickView", "Quick View")}
           </button>
         </div>
       </div>
@@ -110,7 +112,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       {/* Info */}
       <div className="pt-5">
         <p className="f-label text-[#B89A6A] mb-2" style={{ fontSize: "11px", letterSpacing: "0.18em" }}>
-          {product.category}
+          {t(`categories.${product.category}`, product.category)}
         </p>
         <div className="flex items-start justify-between gap-3">
           <h3 className="f-serif text-[#0A0A0A] leading-snug flex-1 min-w-0 transition-colors duration-300 group-hover:text-[#B89A6A]" style={{ fontSize: "clamp(17px, 1.4vw, 20px)" }}>
