@@ -247,9 +247,9 @@ export default function Header() {
                   style={{ animation: "fadeIn 0.18s ease" }}
                 >
                   {[
-                    { key: "signIn",        href: "#" },
-                    { key: "createAccount", href: "#" },
-                    { key: "myOrders",      href: "#" },
+                    { key: "signIn",        href: "/account/login" },
+                    { key: "createAccount", href: "/account/login" },
+                    { key: "myOrders",      href: "/account/orders" },
                     { key: "myWishlist",    href: "/wishlist" },
                   ].map((it) => (
                     <Link

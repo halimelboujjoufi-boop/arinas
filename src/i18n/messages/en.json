@@ -163,6 +163,15 @@
     "youMayLove": "You May Also Love",
     "newArrival": "New Arrival"
   },
+  "auth": {
+    "fullName": "Full Name",
+    "password": "Password",
+    "logout": "Sign Out",
+    "invalidCredentials": "Invalid email or password.",
+    "checkEmail": "Check your email to confirm your account.",
+    "noOrders": "No orders yet",
+    "noOrdersSub": "Your orders will appear here once placed."
+  },
   "admin": {
     "products": "Products",
     "newProduct": "New Product",

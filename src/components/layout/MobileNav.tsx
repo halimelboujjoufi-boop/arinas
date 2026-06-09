@@ -15,7 +15,7 @@ export default function MobileNav() {
     { href: "#search", icon: Search, label: "Search", action: () => dispatch({ type: "TOGGLE_SEARCH" }) },
     { href: "/cart", icon: ShoppingBag, label: "Cart", badge: cartCount },
     { href: "/wishlist", icon: Heart, label: "Wishlist", badge: state.wishlist.length },
-    { href: "/account", icon: User, label: "Account" },
+    { href: "/account/orders", icon: User, label: "Account" },
   ];
 
   return (
