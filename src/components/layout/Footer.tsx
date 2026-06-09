@@ -54,7 +54,7 @@ export default function Footer() {
           {/* Nav columns */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-10">
             <div>
-              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "14px", letterSpacing: "0.3em" }}>
+              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "18px", letterSpacing: "0.3em" }}>
                 {t("footer.house")}
               </p>
               <ul className="space-y-4">
@@ -78,7 +78,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "14px", letterSpacing: "0.3em" }}>
+              <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "18px", letterSpacing: "0.3em" }}>
                 {t("footer.clientCare")}
               </p>
               <ul className="space-y-4">
@@ -105,7 +105,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div className="lg:col-span-3">
-            <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "14px", letterSpacing: "0.3em" }}>
+            <p className="f-label text-[#B89A6A] mb-7" style={{ fontSize: "18px", letterSpacing: "0.3em" }}>
               {t("footer.circle")}
             </p>
             <p className="f-body mb-6" style={{ color: "rgba(255,255,255,0.4)", fontSize: "15px" }}>
