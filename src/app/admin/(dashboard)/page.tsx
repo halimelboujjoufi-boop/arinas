@@ -56,8 +56,17 @@ export default function AdminPage() {
     if (typeof window !== "undefined") {
       try {
         const s = localStorage.getItem(SETTINGS_KEY);
-        return s ? JSON.parse(s) : defaultSettings;
-      } catch { return defaultSettings; }
+        if (s) {
+          const parsed = JSON.parse(s);
+          // migrate old $ values to DH
+          const needsMigration = Object.values(parsed).some((v) => typeof v === "string" && v.includes("$"));
+          if (needsMigration) {
+            localStorage.removeItem(SETTINGS_KEY);
+            return defaultSettings;
+          }
+          return parsed;
+        }
+      } catch { /* ignore */ }
     }
     return defaultSettings;
   });
