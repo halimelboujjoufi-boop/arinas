@@ -128,10 +128,10 @@ export default function AdminPage() {
               {/* KPI Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                 {[
-                  { label: "Total Revenue", icon: DollarSign, ...analytics.revenue, prefix: "$", suffix: "" },
+                  { label: "Total Revenue", icon: DollarSign, ...analytics.revenue, prefix: "", suffix: " DH" },
                   { label: "Total Orders", icon: ShoppingBag, ...analytics.orders, prefix: "", suffix: "" },
                   { label: "Total Customers", icon: Users, ...analytics.customers, prefix: "", suffix: "" },
-                  { label: "Avg. Order Value", icon: TrendingUp, ...analytics.avgOrder, prefix: "$", suffix: "" },
+                  { label: "Avg. Order Value", icon: TrendingUp, ...analytics.avgOrder, prefix: "", suffix: " DH" },
                 ].map((kpi) => (
                   <div key={kpi.label} className="bg-white border border-[#E4E4E7] p-5">
                     <div className="flex items-start justify-between mb-3">
@@ -181,7 +181,7 @@ export default function AdminPage() {
                             <td className="py-3.5 px-6 text-xs font-mono text-[#C9A86A]">{order.id}</td>
                             <td className="py-3.5 px-6 text-sm text-[#111111]">{order.customer}</td>
                             <td className="py-3.5 px-6 text-sm text-[#71717A]">{order.items}</td>
-                            <td className="py-3.5 px-6 text-sm font-medium text-[#111111]">${order.total.toLocaleString()}</td>
+                            <td className="py-3.5 px-6 text-sm font-medium text-[#111111]">{order.total.toLocaleString()} DH</td>
                             <td className="py-3.5 px-6">
                               <span className={`inline-flex items-center gap-1.5 text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full font-medium ${status.color}`}>
                                 <status.icon size={10} />
@@ -216,7 +216,7 @@ export default function AdminPage() {
                           <p className="text-[10px] text-[#A1A1AA]">{p.category}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs font-medium text-[#111111]">${p.price.toLocaleString()}</p>
+                          <p className="text-xs font-medium text-[#111111]">{p.price.toLocaleString()} DH</p>
                           <p className="text-[10px] text-[#A1A1AA]">{soldCount} sold</p>
                         </div>
                         <div className="w-16 h-1.5 bg-[#F5F0EA] rounded overflow-hidden">
@@ -290,7 +290,7 @@ export default function AdminPage() {
                             <td className="py-3.5 px-5 text-xs font-mono text-[#C9A86A]">{order.id}</td>
                             <td className="py-3.5 px-5 text-sm text-[#111111]">{order.customer}</td>
                             <td className="py-3.5 px-5 text-sm text-[#71717A]">{order.items}</td>
-                            <td className="py-3.5 px-5 text-sm font-medium">${order.total.toLocaleString()}</td>
+                            <td className="py-3.5 px-5 text-sm font-medium">{order.total.toLocaleString()} DH</td>
                             <td className="py-3.5 px-5">
                               <span className={`inline-flex items-center gap-1.5 text-[9px] tracking-wider uppercase px-2.5 py-1 rounded-full font-medium ${status.color}`}>
                                 <status.icon size={9} />
@@ -347,10 +347,10 @@ export default function AdminPage() {
               <div className="grid lg:grid-cols-2 gap-5">
                 {[
                   { title: "Revenue by Collection", items: [
-                    { name: "Luxury Collection", pct: 42, value: "$119,595" },
-                    { name: "Limited Edition", pct: 28, value: "$79,730" },
-                    { name: "Summer Collection", pct: 18, value: "$51,255" },
-                    { name: "Casual Luxe", pct: 12, value: "$34,170" },
+                    { name: "Luxury Collection", pct: 42, value: "119,595 DH" },
+                    { name: "Limited Edition", pct: 28, value: "79,730 DH" },
+                    { name: "Summer Collection", pct: 18, value: "51,255 DH" },
+                    { name: "Casual Luxe", pct: 12, value: "34,170 DH" },
                   ]},
                   { title: "Top Categories", items: [
                     { name: "Dresses", pct: 35, value: "643 sales" },
@@ -390,12 +390,12 @@ export default function AdminPage() {
                 { title: "Store Information", fields: [
                   { label: "Store Name", value: "ARINAS" },
                   { label: "Store Email", value: "contact@arinas.com" },
-                  { label: "Currency", value: "USD ($)" },
+                  { label: "Currency", value: "MAD (DH)" },
                   { label: "Language", value: "English" },
                 ]},
                 { title: "Shipping Settings", fields: [
-                  { label: "Free Shipping Threshold", value: "$500" },
-                  { label: "Default Shipping Cost", value: "$35" },
+                  { label: "Free Shipping Threshold", value: "500 DH" },
+                  { label: "Default Shipping Cost", value: "35 DH" },
                 ]},
               ].map((section) => (
                 <div key={section.title} className="bg-white border border-[#E4E4E7] p-6">
