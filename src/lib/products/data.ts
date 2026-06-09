@@ -28,7 +28,8 @@ export async function listStorefrontProducts(): Promise<AdminProduct[]> {
       .select("*")
       .in("status", ["published", "out_of_stock"])
       .order("created_at", { ascending: false });
-    if (error || !data || data.length === 0) return seedAsAdmin().filter((p) => p.status !== "draft");
+    if (error) return seedAsAdmin().filter((p) => p.status !== "draft");
+    if (!data || data.length === 0) return [];
     return (data as ProductRow[]).map(rowToProduct);
   } catch {
     return seedAsAdmin().filter((p) => p.status !== "draft");
