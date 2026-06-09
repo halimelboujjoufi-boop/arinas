@@ -214,7 +214,19 @@
     "delivery": "Livraison & Retours",
     "completeLook": "Compléter le look",
     "youMayLove": "Vous aimerez aussi",
-    "newArrival": "Nouveauté"
+    "newArrival": "Nouveauté",
+    "home": "Accueil",
+    "material": "Matière",
+    "lining": "Doublure",
+    "madeIn": "Fabriqué en France",
+    "modelWears": "Le mannequin porte la taille S - hauteur 177cm",
+    "defaultDescription": "Une composition étudiée de forme et de retenue. Chaque élément sélectionné pour sa contribution à l'ensemble — jamais en compétition, toujours en harmonie.",
+    "care1": "Nettoyage à sec uniquement",
+    "care2": "Ne pas blanchir",
+    "care3": "Repassage à froid si nécessaire",
+    "care4": "Conserver dans la housse fournie",
+    "deliveryText": "Livraison offerte pour toute commande supérieure à 500 $. Livraison express en 2-3 jours ouvrés.",
+    "returnsText": "Retours gratuits sous 30 jours. Les articles doivent être non portés avec les étiquettes d'origine."
   },
   "navMega": {
     "clothing": "Vêtements",

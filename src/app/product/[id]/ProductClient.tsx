@@ -59,12 +59,12 @@ export default function ProductClient({ product, related }: { product: AdminProd
       label: t("product.details"),
       content: (
         <div className="space-y-3 f-body" style={{ fontSize: "12px", lineHeight: 1.9 }}>
-          <p>{product.description || "A studied composition of form and restraint. Each element selected for how it speaks to the whole - never competing, always completing."}</p>
+          <p>{product.description || t("product.defaultDescription")}</p>
           <ul className="space-y-1 mt-4">
-            <li>Material: {product.material || "100% Silk Georgette"}</li>
-            <li>Lining: 100% Silk</li>
-            <li>Made in France</li>
-            <li>Model wears size S - height 177cm</li>
+            <li>{t("product.material")}: {product.material || "100% Silk Georgette"}</li>
+            <li>{t("product.lining")}: 100% Silk</li>
+            <li>{t("product.madeIn")}</li>
+            <li>{t("product.modelWears")}</li>
           </ul>
         </div>
       ),
@@ -74,10 +74,10 @@ export default function ProductClient({ product, related }: { product: AdminProd
       label: t("product.care"),
       content: (
         <ul className="f-body space-y-2" style={{ fontSize: "12px" }}>
-          {["Dry clean only", "Do not bleach", "Cool iron if necessary", "Store in provided garment bag"].map((t) => (
-            <li key={t} className="flex items-center gap-3">
+          {(["care1", "care2", "care3", "care4"] as const).map((key) => (
+            <li key={key} className="flex items-center gap-3">
               <span className="w-1 h-1 bg-[#B89A6A] rounded-full flex-shrink-0" />
-              {t}
+              {t(`product.${key}`)}
             </li>
           ))}
         </ul>
@@ -88,8 +88,8 @@ export default function ProductClient({ product, related }: { product: AdminProd
       label: t("product.delivery"),
       content: (
         <div className="f-body space-y-2" style={{ fontSize: "12px" }}>
-          <p>Complimentary shipping on all orders over $500. Express delivery within 2-3 business days.</p>
-          <p className="mt-3">Free returns within 30 days. Items must be unworn with original tags attached.</p>
+          <p>{t("product.deliveryText")}</p>
+          <p className="mt-3">{t("product.returnsText")}</p>
         </div>
       ),
     },
@@ -100,7 +100,7 @@ export default function ProductClient({ product, related }: { product: AdminProd
       {/* Breadcrumb */}
       <div className="max-w-[1680px] mx-auto px-6 lg:px-14 pt-4 pb-0">
         <p className="f-label text-[#8A8680]" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>
-          <Link href="/" className="hover:text-[#B89A6A] transition-colors">Home</Link>
+          <Link href="/" className="hover:text-[#B89A6A] transition-colors">{t("product.home")}</Link>
           {" / "}
           <Link href="/shop" className="hover:text-[#B89A6A] transition-colors">{product.category}</Link>
           {" / "}
