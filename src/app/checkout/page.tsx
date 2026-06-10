@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useStore, useCartTotal } from "@/lib/store";
 import { COUPON_CODES } from "@/lib/data";
 import {
-  Shield, Lock, Check, Truck, CreditCard, Smartphone,
+  Shield, Lock, Check, Truck, CreditCard,
   Tag, X, ChevronDown, Gift
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-type PaymentMethod = "card" | "applepay" | "paypal";
+type PaymentMethod = "cod" | "card" | "paypal";
 
 export default function CheckoutPage() {
   const { state, dispatch } = useStore();
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
     zip: "", phone: "", cardNumber: "", cardExpiry: "", cardCvc: "", cardName: "",
     giftMessage: "", giftWrap: false,
   });
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cod");
   const [couponInput, setCouponInput] = useState("");
   const [couponError, setCouponError] = useState("");
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -243,8 +243,8 @@ export default function CheckoutPage() {
                 {/* Payment Method Tabs */}
                 <div className="flex gap-3 mb-5">
                   {([
-                    { key: "card", icon: CreditCard, label: "Card" },
-                    { key: "applepay", icon: Smartphone, label: "Apple Pay" },
+                    { key: "cod", icon: Truck, label: "الدفع عند التسليم" },
+                    { key: "card", icon: CreditCard, label: "Carte bancaire" },
                     { key: "paypal", icon: Shield, label: "PayPal" },
                   ] as const).map(({ key, icon: Icon, label }) => (
                     <button
@@ -263,26 +263,45 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
+                {paymentMethod === "cod" && (
+                  <div className="bg-[#FAF9F7] border border-[#B89A6A]/30 p-5 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-[#B89A6A]/10 flex items-center justify-center flex-shrink-0">
+                        <Truck size={20} className="text-[#B89A6A]" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-[#0A0A0A]">الدفع عند الاستلام</p>
+                        <p className="text-xs text-[#8A8680] mt-0.5">Paiement en espèces à la livraison</p>
+                      </div>
+                    </div>
+                    <ul className="space-y-1.5 text-xs text-[#8A8680]">
+                      <li className="flex items-center gap-2"><span className="text-[#B89A6A]">✓</span> تدفع فقط عند استلام طلبك</li>
+                      <li className="flex items-center gap-2"><span className="text-[#B89A6A]">✓</span> التسليم خلال 2-5 أيام عمل</li>
+                      <li className="flex items-center gap-2"><span className="text-[#B89A6A]">✓</span> لا حاجة لبطاقة بنكية</li>
+                    </ul>
+                  </div>
+                )}
+
                 {paymentMethod === "card" && (
                   <div className="space-y-4">
                     <div>
-                      <label className={labelClass}>Card Number</label>
+                      <label className={labelClass}>Numéro de carte</label>
                       <input value={form.cardNumber} onChange={(e) => set("cardNumber", e.target.value)}
                         placeholder="1234 5678 9012 3456" className={inputClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Name on Card</label>
+                      <label className={labelClass}>Nom sur la carte</label>
                       <input value={form.cardName} onChange={(e) => set("cardName", e.target.value)}
-                        placeholder="As it appears on card" className={inputClass} />
+                        placeholder="Tel qu'il apparaît sur la carte" className={inputClass} />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className={labelClass}>Expiry Date</label>
+                        <label className={labelClass}>Date d'expiration</label>
                         <input value={form.cardExpiry} onChange={(e) => set("cardExpiry", e.target.value)}
-                          placeholder="MM / YY" className={inputClass} />
+                          placeholder="MM / AA" className={inputClass} />
                       </div>
                       <div>
-                        <label className={labelClass}>Security Code</label>
+                        <label className={labelClass}>Code de sécurité</label>
                         <input value={form.cardCvc} onChange={(e) => set("cardCvc", e.target.value)}
                           placeholder="CVC" className={inputClass} />
                       </div>
@@ -290,17 +309,10 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                {paymentMethod === "applepay" && (
-                  <div className="text-center py-8 text-sm text-[#8A8680]">
-                    <Smartphone size={32} className="mx-auto mb-3 text-[#8A8680]" />
-                    Apple Pay will be confirmed at checkout
-                  </div>
-                )}
-
                 {paymentMethod === "paypal" && (
                   <div className="text-center py-8 text-sm text-[#8A8680]">
                     <Shield size={32} className="mx-auto mb-3 text-[#8A8680]" />
-                    You will be redirected to PayPal to complete payment
+                    Vous serez redirigé vers PayPal pour finaliser le paiement
                   </div>
                 )}
               </section>
@@ -310,8 +322,8 @@ export default function CheckoutPage() {
                 type="submit"
                 className="w-full bg-[#B89A6A] text-white text-[11px] tracking-[0.3em] uppercase py-5 hover:bg-[#B8963A] transition-colors flex items-center justify-center gap-3 font-medium"
               >
-                <Lock size={14} />
-                Place Order - {total.toLocaleString()} DH
+                {paymentMethod === "cod" ? <Truck size={14} /> : <Lock size={14} />}
+                {paymentMethod === "cod" ? `تأكيد الطلب — ${total.toLocaleString()} DH` : `Passer la commande — ${total.toLocaleString()} DH`}
               </button>
 
               <p className="text-[10px] text-[#8A8680] text-center flex items-center justify-center gap-1.5">
