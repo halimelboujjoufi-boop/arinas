@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+
+  <!-- Right half (orange-red) -->
+  <path d="M 200 48 A 152 152 0 0 1 200 352 L 200 294 A 94 94 0 0 0 200 106 Z" fill="#E63329"/>
+
+  <!-- Left half (gray) -->
+  <path d="M 200 48 A 152 152 0 0 0 200 352 L 200 294 A 94 94 0 0 1 200 106 Z" fill="#808080"/>
+
+  <!-- Top notch (white bump) -->
+  <circle cx="200" cy="53" r="10" fill="white"/>
+
+  <!-- Bottom small gap -->
+  <circle cx="200" cy="347" r="8" fill="white"/>
+
+</svg>

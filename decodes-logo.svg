@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" width="700" height="180">
+  <!-- Background transparent -->
+
+  <!-- DEC - gray -->
+  <text x="10" y="130"
+    font-family="'Arial Black', 'Impact', 'Franklin Gothic Heavy', Arial, sans-serif"
+    font-weight="900"
+    font-size="110"
+    letter-spacing="-3"
+    fill="#555555">DEC</text>
+
+  <!-- Circular O icon (matching original style) -->
+  <!-- Outer circle ring -->
+  <circle cx="328" cy="75" r="52" fill="none" stroke="#E63329" stroke-width="14"/>
+  <!-- Left arrow arc (top-left) -->
+  <path d="M 295 40 L 285 26 L 272 42" fill="none" stroke="#E63329" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right arrow arc (bottom-right) -->
+  <path d="M 361 110 L 371 124 L 384 108" fill="none" stroke="#E63329" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- DES - orange/red -->
+  <text x="382" y="130"
+    font-family="'Arial Black', 'Impact', 'Franklin Gothic Heavy', Arial, sans-serif"
+    font-weight="900"
+    font-size="110"
+    letter-spacing="-3"
+    fill="#E63329">DES</text>
+
+  <!-- Thin bottom accent line -->
+  <rect x="10" y="148" width="680" height="3" rx="1.5" fill="#E63329" opacity="0.3"/>
+</svg>
